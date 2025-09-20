@@ -1,4 +1,5 @@
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb'
+import ecommerce_design from '../assets/banner/ecommerce_design.webp'
 
 function About() {
   return (
@@ -14,7 +15,7 @@ function About() {
         </h1>
         <div className="max-w-3xl w-full bg-white rounded-xl shadow-lg p-6 sm:p-10">
           <div>
-            <img src="/src/assets/banner/Article-34-ecommerce-design-01.png.webp" alt="shopping_image" />
+            <img src={ecommerce_design} alt="ecommerce_design" />
           </div>
           <p className="text-base sm:text-lg text-gray-700 leading-relaxed mb-6">
             Welcome to our E-Commerce platform! We are passionate about delivering high-quality products and an exceptional shopping experience. Our curated selection features the latest trends in fashion, electronics, furniture, and more—each item carefully chosen for quality and value.

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
+import heroImage from '../../assets/hero img/heroImage.webp'
 
 function Breadcrumb({
     toRoute ='',
@@ -11,7 +12,7 @@ function Breadcrumb({
         <img
           loading='lazy'
           className=' w-full h-80 object-cover opacity-70 blur-[1.2px]'
-          src="src/assets/hero img/heroImage.webp" alt="heroImage" />
+          src={heroImage} alt="heroImage" />
 
         <div className='absolute flex flex-col justify-center items-center'>
           <h1 className='text-5xl font-semibold'>{pageName}</h1>
