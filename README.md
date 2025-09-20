@@ -19,7 +19,7 @@ A modern, responsive e-commerce web application built with React js, Redux Toolk
 
 Experience the app live on Vercel!
 
-**🔗 [[View Live Demo]](https://your-app-name.vercel.app)**
+**🔗 [[View Live Demo]]([Nguyen-Ecom](https://ecommerce-web-app1.vercel.app/))**
 
 
 ## 🛠️ Tech Stack
