@@ -1,0 +1,22 @@
+.product-swiper .swiper-button-next,
+.product-swiper .swiper-button-prev {
+  color: white;
+  background: rgba(0, 0, 0, 0.3);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.product-swiper .swiper-button-next::after,
+.product-swiper .swiper-button-prev::after {
+  font-size: 14px;
+}
+
+.product-swiper .swiper-pagination-bullet {
+  background: white;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: darkslategray;
+}
