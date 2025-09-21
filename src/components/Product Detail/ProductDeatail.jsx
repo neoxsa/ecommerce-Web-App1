@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Thumbs, Zoom } from 'swiper/modules'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { addProduct } from '../../features/productToCart'
 import { ToastContainer, toast } from 'react-toastify'
 import 'swiper/css'
@@ -9,6 +10,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
 import 'swiper/css/zoom'
 import '../../assets/css/single-product-swiper.css'
+
 
 
 function ProductDeatail({
@@ -34,6 +36,17 @@ function ProductDeatail({
     const images = [productImage1, productImage2, productImage3].filter(Boolean)
 
     const dispatch = useDispatch()
+
+    const navigate = useNavigate();
+
+    const btnTimeout = () => {
+        setTimeout(() => {
+            navigate('/checkout')
+        }, 500)
+
+        return clearTimeout(btnInterval);
+    }
+
     const decQutantityHandler = () => {
         quantity > 1 && setQuantity(prev => prev - 1)
     }
@@ -157,12 +170,26 @@ function ProductDeatail({
                                     Add to Cart
                                 </button>
                                 <ToastContainer
+                                    role='status'
                                     position='top-center'
                                     autoClose={1000}
                                     pauseOnHover={false}
                                     hideProgressBar={true}
+                                    toastStyle={{
+                                        backgroundColor: '#FFF8E1',
+                                        color: '#065f46',
+                                        border: '1px solid teal',
+                                    }}
                                 />
-                                <button className="flex-1 cursor-pointer bg-gray-900 text-white px-6 py-3 rounded-md hover:bg-gray-800 transition-colors">
+                                <button
+                                    onClick={() => dispatch(addProduct({
+                                        id: { productId },
+                                        image: { productImage1 },
+                                        name: { productTitle },
+                                        qty: { quantity },
+                                        price: { sellingPrice }
+                                    })) && btnTimeout()}
+                                    className="flex-1 cursor-pointer bg-gray-900 text-white px-6 py-3 rounded-md hover:bg-gray-800 transition-colors">
                                     Buy Now
                                 </button>
                             </div>
@@ -173,17 +200,17 @@ function ProductDeatail({
                                         <span className="text-gray-500">SKU :</span>
                                         <span className={`font-medium ${productDetailClass}`}>{productId}</span>
                                     </li>
-                                    <li className='flex justify-between'>
+                                    <li className='flex justify-between w-full'>
                                         <span className="text-gray-500">Category :</span>
-                                        <span className={`font-medium ${productDetailClass}`}>{productType}</span>
+                                        <span className={`font-medium w-4 ${productDetailClass}`}>{productType}</span>
                                     </li>
                                     <li className='flex justify-between'>
                                         <span className="text-gray-500">Tags :</span>
-                                        <span className={`font-medium ${productDetailClass}`}>{categorySlug}</span>
+                                        <span className={`font-medium w-4 ${productDetailClass}`}>{categorySlug}</span>
                                     </li>
                                     <li className='flex justify-between'>
                                         <span className="text-gray-500">Share :</span>
-                                        <span className={`font-medium ${productDetailClass}`}>NA</span>
+                                        <span className={`font-medium  w-4 ${productDetailClass}`}>NA</span>
                                     </li>
                                 </ul>
                             </div>

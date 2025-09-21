@@ -19,8 +19,25 @@ function Cart() {
   const notify = () => toast("Removed from cart!", { type: "error" });
   return (
     <>
-      <Breadcrumb toRoute='/cart' pageName='Cart' />
-      <ToastContainer position='top-center' hideProgressBar={true} autoClose={1000} pauseOnHover={false} />
+      <Breadcrumb
+        toRoute='/cart'
+        pageName='Cart' />
+
+      <ToastContainer
+        role='status'
+        position='top-center'
+        hideProgressBar={true}
+        autoClose={1000}
+        pauseOnHover={false}
+        theme='colored'
+        toastStyle={{
+          backgroundColor: '#FFF8E1',
+          color: '#EF5350',
+          border: '1px solid teal',
+        }}
+
+        closeButton={false}
+      />
 
       <section className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
         <div className='flex flex-col lg:flex-row gap-8'>

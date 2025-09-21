@@ -47,36 +47,36 @@ function Home() {
           </div>
         </section>
         {/* Products */}
-        <section className="flex justify-center items-center flex-col text-gray-950 gap-15">
+        <section className="flex justify-center items-center flex-col text-gray-950 gap-15 mb-10">
           <h1 className="text-3xl font-bold">Our Products</h1>
           <div className="sm:grid flex justify-center flex-col sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 p-4">
             {isLoading || isError
               ? Array.from({ length: 8 }).map((_, index) => (
-                  <ProductCard
-                    key={index}
-                    productName=""
-                    productDesc=""
-                    sellingPrice=""
-                    mrp=""
-                    cardClass="flex flex-col justify-center items-center "
-                    imgClass="  w-75 h-75 md:w-80 md:h-80 bg-gray-500 animate-pulse rounded-t-lg"
-                    productNameClass="w-auto h-6 bg-gray-300 animate-pulse rounded"
-                    productDescClass="w-auto h-4 bg-gray-300 animate-pulse rounded"
-                    sellingPriceClass="w-30 h-8 bg-gray-300 animate-pulse rounded text-none"
-                    mrpClass="w-auto h-4 bg-gray-300 animate-pulse rounded"
-                  />
-                ))
+                <ProductCard
+                  key={index}
+                  productName=""
+                  productDesc=""
+                  sellingPrice=""
+                  mrp=""
+                  cardClass="flex flex-col justify-center items-center "
+                  imgClass="  w-75 h-75 md:w-80 md:h-80 bg-gray-500 animate-pulse rounded-t-lg"
+                  productNameClass="w-auto h-6 bg-gray-300 animate-pulse rounded"
+                  productDescClass="w-auto h-4 bg-gray-300 animate-pulse rounded"
+                  sellingPriceClass="w-30 h-8 bg-gray-300 animate-pulse rounded text-none"
+                  mrpClass="w-auto h-4 bg-gray-300 animate-pulse rounded"
+                />
+              ))
               : products?.slice(0, 8).map((product) => (
-                  <Link to={`/products/slug/${product.slug}`} key={product.id}>
-                    <ProductCard
-                      key={product.id}
-                      productImage={product.images}
-                      productName={product.title}
-                      productDesc={product.description}
-                      sellingPrice={`$${product.price}`}
-                    />
-                  </Link>
-                ))}
+                <Link to={`/products/slug/${product.slug}`} key={product.id}>
+                  <ProductCard
+                    key={product.id}
+                    productImage={product.images}
+                    productName={product.title}
+                    productDesc={product.description}
+                    sellingPrice={`$${product.price}`}
+                  />
+                </Link>
+              ))}
           </div>
           <button
             onClick={() => navigate("/products")}

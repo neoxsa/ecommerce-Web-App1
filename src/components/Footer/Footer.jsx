@@ -43,19 +43,22 @@ function Footer() {
               <li>Privacy Policies</li>
             </ul>
           </div>
-          <div className="flex flex-col gap-8">
+          <form className="flex flex-col gap-8">
             <h4 className="text-gray-400 text-md font-medium">Newsletter</h4>
             <div className="flex flex-wrap gap-3">
               <input
                 type="email"
                 placeholder="Enter Your Email Address"
                 className="w-60 border-b-1 focus:outline-none"
+                required
               />
-              <button className="border-b-1 font-medium cursor-pointer">
+              <button
+              type="submit"
+              className="border-b-1 font-medium cursor-pointer">
                 SUBSCRIBE
               </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
       <div className="w-full text-left text-gray-500 text-sm lg:text-md border-gray-300 border-t-2 pt-5 lg:p-5">
