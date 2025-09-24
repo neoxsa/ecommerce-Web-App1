@@ -1,16 +1,17 @@
-import { Heart, Menu, Search, User, X } from "lucide-react";
+import { Heart, Menu, Search, ShoppingBag, User, X } from "lucide-react";
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import SideNavBar from "../NavBar/SideNavBar";
 import logo from "../../../assets/logo.webp";
-import cartIcon from "../../../assets/nav icon/ant-design_shopping-cart-outlined.svg";
 
 function NavBar() {
   const [hamMenu, setHamMenu] = useState(false);
 
-  const openCloseCLick = () => {
+  const menuToggle = () => {
     setHamMenu((prev) => !prev);
   };
+
+  const navIconClass = `h-7 w-7 lg:h-9 lg:w-9 hover:rounded-full cursor-pointer hover:bg-gray-100 active:bg-gray-100  lg:p-1`
 
   return (
     <>
@@ -18,11 +19,15 @@ function NavBar() {
         <div className="flex justify-center items-center gap-2 lg:gap-5">
           <div className="md:hidden ">
             {!hamMenu ? (
-              <Menu className="w-8 h-8" onClick={() => openCloseCLick()} />
+              <Menu 
+              className="w-9 h-9 md:w-10 md:h-10 hover:bg-gray-100 active:bg-gray-100 rounded-full p-1 " 
+              onClick={() => menuToggle()} />
             ) : (
-              <X className="w-8 h-8" onClick={() => openCloseCLick()} />
+              <X 
+              className="w-8 h-8 md:w-10 md:h-10 hover:bg-gray-100 active:bg-gray-100 rounded-full p-1 "
+              onClick={() => menuToggle()} />
             )}
-            {hamMenu && <SideNavBar closeLinkClick={openCloseCLick} />}
+            {hamMenu && <SideNavBar closeLinkClick={menuToggle} />}
           </div>
 
           <div>
@@ -78,24 +83,20 @@ function NavBar() {
               </NavLink>
             </li>
           </ul>
-          <div className="flex gap-2 md:gap-5 lg:gap-10 ">
+          <div className="flex gap-1 md:gap-5 lg:gap-10 ">
             <span>
-              <User className="h-7 w-7 lg:h-auto lg:w-auto cursor-pointer" />
+              <User className={navIconClass} />
             </span>
             <span>
-              <Search className="h-7 w-7 lg:h-auto lg:w-auto cursor-pointer" />
+              <Search className={navIconClass} />
             </span>
             <span>
-              <Heart className="h-7 w-7 lg:h-auto lg:w-auto cursor-pointer" />
+              <Heart className={navIconClass} />
             </span>
 
             <span>
               <Link to="/cart">
-                <img
-                  className="h-7 w-7 lg:h-auto lg:w-auto text-center"
-                  src={cartIcon}
-                  alt="cart_icon"
-                />
+                <ShoppingBag className={navIconClass} />
               </Link>
             </span>
           </div>

@@ -5,6 +5,8 @@ import Contact from './Contact'
 import SingleProduct from './SingleProduct'
 import Cart from './Cart'
 import Checkout from './Checkout'
+import Login from './Login'
+import Signup from './Signup'
 
 export {
     Home,
@@ -13,5 +15,7 @@ export {
     Contact,
     SingleProduct,
     Cart,
-    Checkout
+    Checkout,
+    Login,
+    Signup
 }

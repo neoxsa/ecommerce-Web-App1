@@ -1,10 +1,12 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 function SideNavBar({
     closeLinkClick,
     navClass = ""
 
 }) {
+
+    const navigate = useNavigate();
     return (
         <>
             <section
@@ -57,6 +59,7 @@ function SideNavBar({
 
                     <div className='absolute bottom-30 gap-2 flex flex-col sm:flex-row justify-center items-center text-center '>
                         <button
+                        onClick={()=> navigate('/login')}
                             className='cursor-pointer rounded-lg text-base  md:text-lg font-semibold border-1 bg-teal-700 border-teal-800  py-3 px-12 sm:px-8 mt-2 hover:bg-teal-800 focus:bg-teal-800 text-white'
                         >Login</button>
                         <button

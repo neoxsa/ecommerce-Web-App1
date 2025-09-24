@@ -1,4 +1,3 @@
-import React from 'react'
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb'
 import { Clock, LocateIcon, Phone } from 'lucide-react'
 
@@ -60,51 +59,51 @@ function Contact() {
               </li>
             </ul>
           </div>
-          
+
           <form onSubmit={submitHandler}
             className='w-full lg:w-1/2 flex flex-col justify-center gap-5 mx-auto mt-10 pr-0 lg:pr-15 lg:justify-self-start'
           >
             <div className='flex flex-col gap-2 px-10'>
               <label htmlFor="name">Full Name</label>
-            <input
-              className='px-4 py-2 border-teal-800 rounded-lg border w-full xl:w-3/5  ' type="text"
-              placeholder='Enter your Name'
-              required
-            />
+              <input
+                className='px-4 py-2 border-teal-800 rounded-lg border w-full xl:w-3/5  ' type="text"
+                placeholder='Enter your Name'
+                required
+              />
             </div>
             <div className='flex flex-col gap-2 px-10'>
-            <label htmlFor="email">Email Address</label>
-            <input
-              className='px-4 py-2 border-teal-800 rounded-lg border w-full xl:w-3/5 ' type="email"
-              placeholder='Enter your email'
-              required
-            />
+              <label htmlFor="email">Email Address</label>
+              <input
+                className='px-4 py-2 border-teal-800 rounded-lg border w-full xl:w-3/5 ' type="email"
+                placeholder='Enter your email'
+                required
+              />
             </div>
             <div className='flex flex-col gap-2 px-10'>
-            <label htmlFor="subject">Subject</label>
-            <input
-              className='px-4 py-2 border-teal-800 rounded-lg border w-full xl:w-3/5 ' type="text"
-              placeholder='Enter message title'
-            />
+              <label htmlFor="subject">Subject</label>
+              <input
+                className='px-4 py-2 border-teal-800 rounded-lg border w-full xl:w-3/5 ' type="text"
+                placeholder='Enter message title'
+              />
             </div>
             <div className='flex flex-col gap-2 px-10'>
-            <label htmlFor="message">Message</label>
-            <textarea
-              name="message"
-              id="message"
-              placeholder='Type your message here'
-              className='px-4 py-2 border-teal-800 rounded-lg border w-full xl:w-3/5 '
-              required
-            ></textarea>
+              <label htmlFor="message">Message</label>
+              <textarea
+                name="message"
+                id="message"
+                placeholder='Type your message here'
+                className='px-4 py-2 border-teal-800 rounded-lg border w-full xl:w-3/5 '
+                required
+              ></textarea>
             </div>
 
             <div className='flex flex-col gap-2 px-10'>
               <button
-              type='submit'
-              className='cursor-pointer w-full md:w-50  rounded text-base sm:text-lg md:text-lg font-semibold border-1 bg-teal-700 border-teal-800  py-3 px-15 mt-2 hover:bg-teal-800 text-white'
-            >
-              Submit
-            </button>
+                type='submit'
+                className='cursor-pointer w-full md:w-50  rounded text-base sm:text-lg md:text-lg font-semibold border-1 bg-teal-700 border-teal-800  py-3 px-15 mt-2 hover:bg-teal-800 text-white'
+              >
+                Submit
+              </button>
             </div>
           </form>
         </div>
