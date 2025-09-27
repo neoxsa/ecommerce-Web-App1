@@ -1,10 +1,13 @@
-import { Heart, Menu, Search, ShoppingBag, User, X } from "lucide-react";
+import { Menu, Search, ShoppingBag, User, UserX2Icon, X } from "lucide-react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import SideNavBar from "../NavBar/SideNavBar";
 import logo from "../../../assets/logo.webp";
 
 function NavBar() {
+
+  const authStatus = useSelector((state) => state.auth.status)
   const [hamMenu, setHamMenu] = useState(false);
 
   const menuToggle = () => {
@@ -19,13 +22,13 @@ function NavBar() {
         <div className="flex justify-center items-center gap-2 lg:gap-5">
           <div className="md:hidden ">
             {!hamMenu ? (
-              <Menu 
-              className="w-9 h-9 md:w-10 md:h-10 hover:bg-gray-100 active:bg-gray-100 rounded-full p-1 " 
-              onClick={() => menuToggle()} />
+              <Menu
+                className="w-9 h-9 md:w-10 md:h-10 hover:bg-gray-100 active:bg-gray-100 rounded-full p-1 "
+                onClick={() => menuToggle()} />
             ) : (
-              <X 
-              className="w-8 h-8 md:w-10 md:h-10 hover:bg-gray-100 active:bg-gray-100 rounded-full p-1 "
-              onClick={() => menuToggle()} />
+              <X
+                className="w-8 h-8 md:w-10 md:h-10 hover:bg-gray-100 active:bg-gray-100 rounded-full p-1 "
+                onClick={() => menuToggle()} />
             )}
             {hamMenu && <SideNavBar closeLinkClick={menuToggle} />}
           </div>
@@ -85,15 +88,24 @@ function NavBar() {
           </ul>
           <div className="flex gap-1 md:gap-5 lg:gap-10 ">
             <span>
-              <User className={navIconClass} />
+              {
+                authStatus ? (
+                  <Link>
+                    <User className={navIconClass} />
+                  </Link>
+                ) : (
+                  <Link
+                    to="/login"
+                  >
+                    <UserX2Icon className={navIconClass}/>
+                  </Link>
+
+                )
+              }
             </span>
             <span>
               <Search className={navIconClass} />
             </span>
-            <span>
-              <Heart className={navIconClass} />
-            </span>
-
             <span>
               <Link to="/cart">
                 <ShoppingBag className={navIconClass} />

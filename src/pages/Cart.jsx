@@ -15,7 +15,6 @@ function Cart() {
   const subTotal = cartProduct.reduce((total, item) =>
     total + (item.price.sellingPrice * item.qty.quantity), 0);
 
-
   const notify = () => toast("Removed from cart!", { type: "error" });
   return (
     <>
@@ -87,7 +86,7 @@ function Cart() {
                     <div>
                       <div className='inline-flex items-center border border-gray-200 rounded-md'>
                         <button
-                          className="w-8 h-8 flex items-center justify-center hover:bg-gray-50"
+                          className="w-8 h-8 flex items-center justify-center hover:bg-gray-50 cursor-pointer"
                           onClick={() => dispatch(updateQty({
                             productId: product.id.productId,
                             quantity: product.qty.quantity > 1 ? product.qty.quantity - 1 : 1
@@ -97,7 +96,7 @@ function Cart() {
                         </button>
                         <span className="w-10 text-center border-x py-1">{product.qty.quantity}</span>
                         <button
-                          className="w-8 h-8 flex items-center justify-center hover:bg-gray-50"
+                          className="w-8 h-8 flex items-center justify-center hover:bg-gray-50 cursor-pointer"
                           onClick={() => dispatch(updateQty({
                             productId: product.id.productId,
                             quantity: product.qty.quantity + 1
@@ -117,7 +116,7 @@ function Cart() {
                           notify();
                         }}
                       >
-                        <Trash className='w-5 h-5' />
+                        <Trash className='w-5 h-5 cursor-pointer' />
                       </button>
                     </div>
                   </div>

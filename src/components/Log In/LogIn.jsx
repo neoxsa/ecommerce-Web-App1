@@ -9,7 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 
 const schema = yup.object().shape({
-  email: yup.string().email().required("Email is required"),
+  email: yup.string().email("Invalid email or incorrect email").required("Email is required"),
   password: yup.string().required("Password is required")
 })
 
@@ -18,6 +18,7 @@ function LogIn() {
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const login = async (data) => {
     console.log(data);
@@ -34,34 +35,39 @@ function LogIn() {
     }
   }
 
+  const passwordHandler = () => { setShowPassword((prev) => !prev) }
+
+  console.log(errors);
+
   return (
     <div className=" flex-col space-y-3 inline-block rounded-md bg-amber-50 p-10 shadow-xl">
-      <h2 className="mx-auto text-3xl font-semibold text-center">
+      <h2 className="mx-auto text-2xl md:text-3xl font-semibold text-center">
         Login
       </h2>
-      <p className="text-right mt-2">
+      <p className="text-right text-sm md:text-base mt-2">
         Don't have any account?&nbsp;
         <Link
           to="/sign-up"
-          className=" font-medium text-primary text-blue-600 transition-all duration-200 hover:underline"
+          className=" font-medium text-blue-600 transition-all duration-200 hover:underline hover:text-blue-800 active:text-blue-800 active:underline"
         >
           Sign Up
         </Link>
       </p>
       {
-        error && <p className="text-red-600 text-center mt-8  ">Something went wrong.</p>
+        error && <div className='text-red-500 text-center font-medium  w-80 inline-flex flex-wrap mx-auto '>{error}</div>
       }
       <form onSubmit={handleSubmit(login)} className='flex flex-col gap-4'>
         <div className="flex flex-col gap-1">
           <label
-            className="font-normal"
+            className="font-normal text-md  mt-2"
           >Email:</label>
           <input
             type="email"
-            {...register('login', {
+            className={`w-60 md:w-80 rounded-lg p-2 font-medium outline-2 focus:outline-3 focus:outline-teal-800 ${error.includes('email') || errors.email ? 'outline-red-600 ' : 'outline-2'}`}
+            {...register('email', {
               required: true
             })}
-            className="w-80 rounded-lg p-2 font-medium outline-2 focus:outline-3 focus:outline-teal-800" />
+          />
           {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
         </div>
         <div className="flex flex-col gap-1">
@@ -69,11 +75,14 @@ function LogIn() {
             className="font-normal"
           >Password:</label>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
+            className={` w-60 md:w-80 rounded-lg p-2 font-medium outline-2 focus:outline-3 focus:outline-teal-800 ${error.includes('password') || errors.password ? 'outline-red-600 ' : 'outline-2'}`}
             {...register('password', {
               required: true
             })}
-            className="w-80 rounded-lg p-2 font-medium outline-2 focus:outline-3 focus:outline-teal-800" />
+          />
+          <div className="text-sm cursor-pointer text-teal-600  hover:underline active:text-teal-800 w-fit" onClick={passwordHandler}>{showPassword ? "Hide" : "Show"}</div>
+          
           {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
         </div>
         <div className="flex self-end">

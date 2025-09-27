@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Thumbs, Zoom } from 'swiper/modules'
 import { useDispatch } from 'react-redux'
@@ -12,8 +12,7 @@ import 'swiper/css/zoom'
 import '../../assets/css/single-product-swiper.css'
 
 
-
-function ProductDeatail({
+function ProductDetail({
     productId,
     productImage1,
     productImage2,
@@ -22,7 +21,7 @@ function ProductDeatail({
     sellingPrice,
     productType,
     categorySlug,
-    desciption,
+    description,
     imgClass = "",
     productNameClass = "",
     productParaClass = "",
@@ -33,26 +32,36 @@ function ProductDeatail({
 
     const [quantity, setQuantity] = useState(1);
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    const images = [productImage1, productImage2, productImage3].filter(Boolean)
+    const [productSize, setProductSize] = useState([]);
+    const images = [productImage1, productImage2, productImage3].filter(Boolean);
 
-    const dispatch = useDispatch()
-
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (productType === "Clothes") {
+            setProductSize(['S', 'M', 'L', 'XL']);
+        } else if (productType === "Shoes") {
+            setProductSize([5, 6, 7, 8, 9, 10, 11, 12]);
+        } else if (productType === "Furniture") {
+            setProductSize(["Normal"]);
+        } else if (productType === "Electronics") {
+            setProductSize([""]);
+        }
+    }, [])
 
     const btnTimeout = () => {
         setTimeout(() => {
             navigate('/checkout')
-        }, 500)
-
-        return clearTimeout(btnInterval);
+        }, 500);
     }
 
     const decQutantityHandler = () => {
-        quantity > 1 && setQuantity(prev => prev - 1)
+        quantity > 1 && setQuantity(prev => prev - 1);
     }
 
     const incQutantityHandler = () => {
-        quantity >= 1 && setQuantity(prev => prev + 1)
+        quantity >= 1 && setQuantity(prev => prev + 1);
     }
 
     const notify = () => toast("Added to cart!", { type: "success" });
@@ -120,22 +129,27 @@ function ProductDeatail({
                                 <span className={`text-xl sm:text-2xl text-teal-900 font-semibold ${sellingPriceClass}`}>${sellingPrice}</span>
                                 <span className="text-gray-500">⭐⭐⭐⭐</span>
                             </div>
-                            <p className={`text-gray-700 text-sm sm:text-base ${productParaClass}`}>Lorem ipsum dolor sit amet.</p>
+                            <p className={`text-gray-700 text-sm sm:text-base ${productParaClass}`}>{productType}</p>
                         </div>
 
                         {/* Size Selection */}
-                        <div className="space-y-3">
-                            <h2 className="font-semibold text-lg">Size</h2>
-                            <div className='flex flex-wrap gap-3'>
-                                {['S', 'M', 'L', 'XL'].map(size => (
-                                    <button
-                                        key={size}
-                                        className="px-4 py-2 border rounded-md hover:border-teal-600 hover:text-teal-600 transition-colors">
-                                        {size}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
+                        {
+                            productType === "Electronics" || productType === "" ? null :
+                                (
+                                    <div className="space-y-3">
+                                        <h2 className="font-semibold text-lg">Size</h2>
+                                        <div className='flex flex-wrap gap-3'>
+                                            {productSize.map(size => (
+                                                <button
+                                                    key={size}
+                                                    className="px-4 py-2 border rounded-md hover:border-teal-600 hover:text-teal-600 transition-colors">
+                                                    {size}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )
+                        }
 
                         {/* Quantity and Buttons */}
                         <div className="space-y-4">
@@ -143,14 +157,14 @@ function ProductDeatail({
                                 <h2 className="font-semibold text-lg">Quantity</h2>
                                 <div className='inline-flex items-center border border-gray-300 rounded-md'>
                                     <button
-                                        className="px-4 py-2 hover:bg-gray-100 transition-colors"
+                                        className="px-4 py-2 hover:bg-gray-100 transition-colors cursor-pointer"
                                         onClick={decQutantityHandler}
                                     >
                                         -
                                     </button>
                                     <span className="px-5 py-2 border-x">{quantity}</span>
                                     <button
-                                        className="px-4 py-2 hover:bg-gray-100 transition-colors"
+                                        className="px-4 py-2 hover:bg-gray-100 transition-colors cursor-pointer"
                                         onClick={incQutantityHandler}
                                     >
                                         +
@@ -193,6 +207,7 @@ function ProductDeatail({
                                     Buy Now
                                 </button>
                             </div>
+
                             {/* Product Info */}
                             <div className="border-t border-gray-200 pt-10 ">
                                 <ul className="grid grid-cols-1 gap-4 text-sm lg:w-1/4 w-2/4">
@@ -223,7 +238,7 @@ function ProductDeatail({
             <div className="border-t border-gray-200 py-6">
                 <h2 className="text-xl font-bold mb-4">Description</h2>
                 <div className=" max-w-none">
-                    <p className={`text-gray-700 ${productDescClass}`}>{desciption}</p>
+                    <p className={`text-gray-700 ${productDescClass}`}>{description}</p>
                 </div>
             </div>
 
@@ -231,4 +246,4 @@ function ProductDeatail({
     )
 }
 
-export default ProductDeatail
+export default ProductDetail

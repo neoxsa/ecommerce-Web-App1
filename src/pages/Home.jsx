@@ -11,11 +11,6 @@ function Home() {
   const { data: products, isLoading, isError, error } = useGetProductsQuery();
 
   const navigate = useNavigate();
-  {
-    isError && (
-      <div className="text-red-500">Something went wrong: {error.error}</div>
-    );
-  }
 
   return (
     <>
@@ -29,7 +24,9 @@ function Home() {
           </div>
           <div className=" grid grid-cols-2 grid-rows-2   md:flex gap-6 lg:gap-20">
             <span className="flex flex-col justify-center cursor-pointer items-center bg-amber-100 py-4 px-3.5 rounded-full border-amber-200 border">
-              <Shirt className="md:w-15 md:h-15 w-8 h-8" />
+              <Shirt
+                onClick={() => navigate("")}
+                className="md:w-15 md:h-15 w-8 h-8" />
               <h2 className="md:text-xl text-md ">Clothes</h2>
             </span>
             <span className="flex flex-col justify-center cursor-pointer items-center bg-amber-100 py-4 px-5 rounded-full border-amber-200 border">
@@ -38,7 +35,7 @@ function Home() {
             </span>
             <span className="flex flex-col justify-center cursor-pointer items-center bg-amber-100 py-4 px-3.5  rounded-full border-amber-200 border">
               <Speaker className="md:w-15 md:h-15 w-8 h-8" />
-              <h2 className="md:text-xl text-md">Gagets</h2>
+              <h2 className="md:text-xl text-md">Gadgets</h2>
             </span>
             <span className="flex flex-col justify-center cursor-pointer items-center bg-amber-100 py-4 px-4.5  rounded-full border-amber-200 border">
               <Box className="md:w-15 md:h-15 w-8 h-8" />
@@ -78,6 +75,11 @@ function Home() {
                 </Link>
               ))}
           </div>
+          
+          {isError && (
+            <div className="text-red-500">Something went wrong: {error.error}</div>
+          )}
+
           <button
             onClick={() => navigate("/products")}
             className="cursor-pointer min-w-32 text-base sm:text-lg md:text-xl font-semibold text-teal-800 border-1 border-teal-800  py-3 px-15 mt-2 hover:bg-teal-800 hover:text-white transition-colors duration-300"

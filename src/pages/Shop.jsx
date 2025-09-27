@@ -124,7 +124,6 @@ function Shop() {
                 sellingPriceClass="w-30 h-8 bg-gray-300 animate-pulse rounded text-none"
                 mrpClass="w-auto h-4 bg-gray-300 animate-pulse rounded"
               />
-
             )
             :
             filterProducts?.map((product) =>
@@ -142,11 +141,10 @@ function Shop() {
               </Link>
             )
         }
-
       </div>
 
       {/* Pagination */}
-      <div >
+      <div>
         <div className='flex justify-center  flex-wrap items-center my-10 gap-3'>
           <button
             onClick={() => handlePreviousPage()}
@@ -154,7 +152,6 @@ function Shop() {
           {
             Array.from({ length: 4 }, (_, index) => index + 1).map((pageNumber) => (
               <button
-
                 key={pageNumber}
                 onClick={() => {
                   setPage(pageNumber), scrollTopOnClick
@@ -170,8 +167,7 @@ function Shop() {
             className={` px-2 py-1 lg:px-4 lg:py-2 cursor-pointer  ${page === 4 ? 'text-gray-400 bg-gray-100' : 'text-gray-700 bg-gray-200'} rounded hover:bg-gray-300 transition`}>Next</button>
         </div>
       </div >
-<FooterStripe />
-
+      <FooterStripe />
     </>
   )
 }
