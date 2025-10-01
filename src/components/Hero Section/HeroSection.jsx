@@ -21,8 +21,7 @@ function HeroSection() {
             Discover Our New Collection
           </h1>
           <p className="font-medium tracking-wide text-sm sm:text-base md:text-lg">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Necessitatibus laborum quo ad facilis voluptas deleniti!
+            Explore our new collection—fresh styles, bold designs, and timeless pieces crafted to elevate your wardrobe.
           </p>
 
           <button

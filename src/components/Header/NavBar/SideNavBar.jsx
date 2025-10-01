@@ -14,7 +14,7 @@ function SideNavBar({
     return (
         <>
             <section
-                className=' w-full h-full fixed z-40'
+                className=' w-full h-full fixed z-40 top-11'
                 onClick={closeLinkClick}>
                 <nav
                     className={` z-50 bg-white h-screen w-50 sm:w-70 fixed p-5 mt-5 left-0  ${navClass}`}

@@ -7,6 +7,8 @@ import Cart from './Cart'
 import Checkout from './Checkout'
 import Login from './Login'
 import Signup from './Signup'
+import Profile from './Profile'
+import CategoryProducts from './CategoryProducts'
 
 export {
     Home,
@@ -17,5 +19,7 @@ export {
     Cart,
     Checkout,
     Login,
-    Signup
+    Signup,
+    Profile,
+    CategoryProducts
 }

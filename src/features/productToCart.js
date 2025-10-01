@@ -6,6 +6,7 @@ const initialState = {
     products: inCart
 }
 
+
 export const product2Cart = createSlice({
     name: 'ProductToCart',
     initialState,

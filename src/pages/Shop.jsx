@@ -10,7 +10,7 @@ function Shop() {
   const limit = 16
   const [page, setPage] = useState(1)
 
-  const scrollTopOnClick = window.scrollTo({ top: 0, behavior: 'smooth' });
+  const scrollTopOnClick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   const { data: products, isLoading, error, isError } = useGetProductsPagedQuery(page, limit)
 
@@ -18,7 +18,7 @@ function Shop() {
   const handlePreviousPage = () => {
     if (page > 1) {
       setPage(prevPage => prevPage - 1)
-      scrollTopOnClick;
+      scrollTopOnClick();
     }
     else {
       setPage(1)
@@ -31,35 +31,46 @@ function Shop() {
     if (page >= 4) {
       setPage(4)
     }
-    scrollTopOnClick;
+    scrollTopOnClick();
   }
 
   const [selectedFilter, setSelectedFilter] = useState("");
   const [filterProducts, setFilterProducts] = useState([]);
+  const [priceToggle, setPriceToggle] = useState(1);
 
   useEffect(() => {
     if (!products) {
       setFilterProducts([]);
       return;
     }
-    if (selectedFilter === "") {
-      setFilterProducts(products);
-    } else if (selectedFilter === "clothesFilter") {
-      setFilterProducts(products.filter((product) => product.category.name === "Clothes"));
-    } else if (selectedFilter === "shoesFilter") {
-      setFilterProducts(products.filter((product) => product.category.name === "Shoes"));
-    } else if (selectedFilter === "electronicsFilter") {
-      setFilterProducts(products.filter((product) => product.category.name === "Electronics"));
-    } else if (selectedFilter === "furnitureFilter") {
-      setFilterProducts(products.filter((product) => product.category.name === "Furniture"));
-    }
-  }, [products, selectedFilter]);
 
+    let updatedProducts = [...products];
+
+    if (selectedFilter === "clothesFilter") {
+      updatedProducts = updatedProducts.filter((product) => product.category.name === "Clothes");
+    } else if (selectedFilter === "shoesFilter") {
+      updatedProducts = updatedProducts.filter((product) => product.category.name === "Shoes");
+    } else if (selectedFilter === "electronicsFilter") {
+      updatedProducts = updatedProducts.filter((product) => product.category.name === "Electronics");
+    } else if (selectedFilter === "furnitureFilter") {
+      updatedProducts = updatedProducts.filter((product) => product.category.name === "Furniture");
+    }
+
+
+    if (priceToggle === 2) {
+      updatedProducts = [...updatedProducts].sort((a, b) => b.price - a.price);
+    } else if (priceToggle === 0) {
+      updatedProducts = [...updatedProducts].sort((a, b) => a.price - b.price);
+    }
+
+    setFilterProducts(updatedProducts);
+
+  }, [products, selectedFilter, priceToggle]);
 
   const handleSelectChange = (value) => {
     setSelectedFilter(value);
-  };
 
+  };
 
   return (
     <>
@@ -76,14 +87,19 @@ function Shop() {
             htmlFor="priceFilter"
             className='font-medium'>Price range:</label>
           <div className='flex items-center gap-2 text-sm'>
-            <span>Low</span>
+            <span name='price' >Low</span>
             <input
               className='w-10'
+              value={priceToggle}
+              onChange={(e) => {
+                setPriceToggle(e.target.valueAsNumber);
+              }}
               type="range"
               id='price'
               name='price'
               min="0"
-              max="1"
+              step="1"
+              max="2"
             />
             <span>High</span>
           </div>
@@ -154,7 +170,7 @@ function Shop() {
               <button
                 key={pageNumber}
                 onClick={() => {
-                  setPage(pageNumber), scrollTopOnClick
+                  setPage(pageNumber), scrollTopOnClick()
                 }}
                 className={`px-2 py-1 cursor-pointer lg:px-4 lg:py-2 rounded ${page === pageNumber ? 'bg-teal-800 text-white' : 'bg-gray-200 text-gray-700'} hover:bg-gray-300 transition`}
               >
