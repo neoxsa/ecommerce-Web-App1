@@ -11,7 +11,7 @@ function NavBar() {
   const [hamMenu, setHamMenu] = useState(false);
   const [search, setSearch] = useState(false);
   
-  const cartCount = useSelector((state)=> state.ProductToCart.products.length)
+  const cartCount = useSelector((state)=> state.ProductToCart.products.length);
 
   const menuToggle = () => {
     setHamMenu((prev) => !prev);
@@ -19,14 +19,12 @@ function NavBar() {
 
   const navIconClass = `h-8 w-8 xl:h-9 xl:w-9 hover:rounded-full cursor-pointer hover:bg-gray-100 active:bg-gray-100 transition-colors duration-200 p-1`;
 
-
-
   return (
     <>
       <nav className="w-full h-16 sm:h-18 md:h-20 sticky top-0 z-50 flex items-center justify-between px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16 bg-white border-b border-gray-300 shadow-sm">
-        {/* Left Section - Mobile Menu & Logo */}
+
         <div className="flex items-center justify-center gap-2 sm:gap-3 lg:gap-4">
-          {/* Mobile Menu Button */}
+
           <div className="lg:hidden">
             {!hamMenu ? (
               <Menu
@@ -42,7 +40,7 @@ function NavBar() {
             {hamMenu && <SideNavBar closeLinkClick={menuToggle} />}
           </div>
 
-          {/* Logo */}
+
           <div
             className={`${search ? "hidden md:block" : "block"} transition-all duration-300`}
           >
@@ -56,7 +54,7 @@ function NavBar() {
           </div>
         </div>
 
-        {/* Center Section - Desktop Navigation */}
+
         <div className="hidden lg:flex items-center justify-center flex-1 max-w-md xl:max-w-lg">
           <ul className="flex items-center gap-6 xl:gap-8 2xl:gap-12">
             <li>
@@ -118,11 +116,11 @@ function NavBar() {
           </ul>
         </div>
 
-        {/* Right Section - Search, User, Cart */}
+
         <div
           className={`flex items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 ${search ? "flex-1 justify-end lg:justify-normal lg:flex-initial" : ""}`}
         >
-          {/* Search Section */}
+
           <div className="flex items-center">
             {!search ? (
               <button
@@ -141,7 +139,6 @@ function NavBar() {
             )}
           </div>
 
-          {/* User Account Icon */}
           <div className={`${search ? " md:flex" : "flex"} items-center`}>
             {authStatus ? (
               <Link
@@ -162,7 +159,7 @@ function NavBar() {
             )}
           </div>
 
-          {/* Shopping Cart Icon */}
+
           <div className={`${search ? " hidden md:flex" : "flex"} items-center`}>
             <Link
               to="/cart"
@@ -170,7 +167,7 @@ function NavBar() {
               aria-label="Shopping cart"
             >
               <ShoppingBag className={navIconClass} />
-              {/* Cart item count badge with responsive positioning */}
+
               <span
                 className={`absolute ${search ? "-top-0.5 -right-0.5 md:-top-1 md:-right-1" : "-top-1 -right-1"} bg-teal-600 text-white text-xs rounded-full h-4 w-4 md:h-5 md:w-5 flex items-center justify-center font-medium text-[10px] md:text-xs transition-all duration-200`}
               >

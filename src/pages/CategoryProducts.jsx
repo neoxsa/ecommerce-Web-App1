@@ -84,12 +84,12 @@ function CategoryProducts() {
                         className='ml-4 border-2 border-green-600 rounded p-1'
                         onChange={(e) => handleSelectChange(e.target.value)}
                     >
-                        <option value="" className='text-gray-400'>Select</option>
-                        <option value="all">All</option>
-                        <option value="clothes">Clothes</option>
-                        <option value="shoes">Shoes</option>
-                        <option value="electronics">Electronics</option>
-                        <option value="furniture">Furniture</option>
+                        <option value="none" className='text-gray-400'>Select</option>
+                        <option value="">All</option>
+                        <option value="clothesFilter">Clothes</option>
+                        <option value="shoesFilter">Shoes</option>
+                        <option value="electronicsFilter">Electronics</option>
+                        <option value="furnitureFilter">Furniture</option>
                     </select>
                 </div>
 

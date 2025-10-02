@@ -141,6 +141,7 @@ function ProductDetail({
                                         <div className='flex flex-wrap gap-3'>
                                             {productSize.map(size => (
                                                 <button
+                                                
                                                     key={size}
                                                     className="px-4 py-2 border rounded-md hover:border-teal-600 hover:text-teal-600 transition-colors">
                                                     {size}

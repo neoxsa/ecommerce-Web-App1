@@ -259,7 +259,10 @@ function Checkout() {
                                             </div>
                                             <div className='flex justify-between items-center'>
                                                 <span>Delivery Charges</span>
-                                                <span>${shippingCharge}</span>
+                                                {shippingCharge === 0 ? (<p className='text-green-600 '>
+                                                    Free
+                                                </p>) : (<span >${shippingCharge}</span>)}
+
                                             </div>
                                             <div className='flex justify-between items-center pt-3 border-t border-gray-200'>
                                                 <span className='text-lg font-medium'>Grand Total</span>

@@ -15,9 +15,9 @@ function Contact() {
       />
 
       <div className=' flex flex-col gap-10 justify-center items-center'>
-        <div className='text-center w-1/2 mt-10'>
+        <div className='text-center  mt-10'>
           <h1 className='text-3xl font-semibold'>Get in Touch</h1>
-          <p className='text-gray-500 mt-1.5 '>For More Information About Our Product & Services. Please Feel Free To Drop Us An Email. Our Staff Always Be There To Help You Out. Do Not Hesitate!</p>
+          <p className='text-gray-500 mt-1.5 w-80 lg:w-120 px-7 text-center'>For More Information About Our Product & Services. Please Feel Free To Drop Us An Email. Our Staff Always Be There To Help You Out. Do Not Hesitate!</p>
         </div>
         <div className='w-full flex lg:flex-row flex-col md:justify-center md:items-center md:gap-5 my-5'>
           <div className='w-full justify-center flex items-center lg:w-1/2  lg:px-10'>
@@ -36,9 +36,9 @@ function Contact() {
                 <div
                   className='flex flex-col gap-3 text-base lg:text-md'
                 >
-                  <h1
-                    className='lg:text-xl  font-medium'
-                  >Phone</h1>
+                  <h1 className='lg:text-xl  font-medium'>
+                    Phone
+                  </h1>
                   <p>Mobile: +(84)546-6789</p>
                   <p>Hotline: +(84)546-6789</p>
                 </div>
@@ -47,9 +47,7 @@ function Contact() {
                 <Clock
                   className='w-8 h-8'
                 />
-                <div
-                  className='flex flex-col gap-2 text-base lg:text-md'
-                >
+                <div className='flex flex-col gap-2 text-base lg:text-md'>
                   <h1
                     className=' lg:text-xl  font-medium'
                   >Working Time</h1>

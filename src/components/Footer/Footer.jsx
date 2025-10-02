@@ -8,18 +8,18 @@ function Footer() {
       <div className="border-t-3 border-gray-300 px-4 md:px-10 lg:px-20 pt-10 pb-10 flex flex-col lg:flex-row w-full justify-center items-center gap-10 lg:gap-40">
         <div className="w-full lg:w-1/3 flex flex-col gap-4 mb-10 lg:mb-0">
           <span>
-            <img className="w-35 h-25" src={logo} alt="logo" />
+            <img className="w-45 h-14" src={logo} alt="logo" />
           </span>
           <div>
-            <p className="text-gray-400 text-md ">
+            <p className="text-gray-500 text-md ">
               400 University Drive Suite 200 Coral Gables,
             </p>
-            <p className="text-gray-400 text-md ">FL 33134 USA</p>
+            <p className="text-gray-500 text-md ">FL 33134 USA</p>
           </div>
         </div>
         <div className="w-full lg:w-2/3 flex  md:flex-row flex-wrap lg:flex-nowrap gap-20 lg:gap-30 justify-center items-start">
           <div className="flex flex-col gap-8 mb-10 md:mb-0">
-            <h4 className="text-gray-400 text-md font-medium">Link</h4>
+            <h4 className="text-gray-500 text-md font-semibold">Link</h4>
             <ul className="flex flex-col gap-8 font-medium">
               <li>
                 <NavLink to="/">Home</NavLink>
@@ -36,7 +36,7 @@ function Footer() {
             </ul>
           </div>
           <div className="flex flex-col gap-8 mb-10 md:mb-0">
-            <h4 className="text-gray-400 text-md font-medium">Help</h4>
+            <h4 className="text-gray-500 text-md font-semibold">Help</h4>
             <ul className="flex flex-col gap-8 font-medium">
               <li>Payment Options</li>
               <li>Return</li>
@@ -44,7 +44,7 @@ function Footer() {
             </ul>
           </div>
           <form className="flex flex-col gap-8">
-            <h4 className="text-gray-400 text-md font-medium">Newsletter</h4>
+            <h4 className="text-gray-500 text-md font-semibold">Newsletter</h4>
             <div className="flex flex-wrap gap-3">
               <input
                 type="email"
