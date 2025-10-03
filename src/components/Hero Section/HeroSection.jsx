@@ -5,12 +5,13 @@ function HeroSection() {
   const navigate = useNavigate();
   return (
     <>
-      <div className="relative w-full min-h-screen flex items-center  justify-center text-gray-800">
+      <div className="relative w-full min-h-[60vh] md:min-h-screen flex items-center  justify-center text-gray-800">
         <img
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-screen object-cover object-center"
           src={heroImage}
           alt="hero image"
-          loading="lazy"
+          loading="eager"
+          fetchPriority="high"
         />
 
         <div className="relative rounded-md w-11/12 sm:w-4/5 md:w-3/5 lg:w-2/5 bg-orange-100 p-4 sm:p-6 md:p-8 lg:p-10 mx-auto lg:mx-0 lg:mr-10 mt-10 lg:mt-0 flex flex-col gap-3 sm:gap-4 md:gap-5 xl:absolute xl:right-10">

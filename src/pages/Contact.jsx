@@ -6,7 +6,6 @@ function Contact() {
   const submitHandler = () => {
     console.log('Sent Successfully')
   }
-
   return (
     <>
       <Breadcrumb

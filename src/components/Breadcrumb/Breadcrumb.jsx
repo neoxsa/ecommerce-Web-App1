@@ -10,11 +10,14 @@ function Breadcrumb({
     <div>
       <div className='relative h-80 flex items-center justify-center w-full'>
         <img
-          loading='lazy'
           className=' w-full h-80 object-cover opacity-70 blur-[1.2px]'
-          src={heroImage} alt="heroImage" />
+          src={heroImage} 
+          alt="heroImage" 
+          loading='eager'
+          fetchPriority='high'
+          />
 
-        <div className='absolute flex flex-col justify-center items-center'>
+        <div className='absolute flex w-full h-full flex-col justify-center items-center'>
           <h1 className='text-5xl font-semibold'>{pageName}</h1>
           <div className='flex my-4 gap-5'>
             <span>

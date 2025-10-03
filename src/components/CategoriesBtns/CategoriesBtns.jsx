@@ -19,26 +19,26 @@ function CategoriesBtns() {
                     onClick={() => navigate("/products/category") && dispatch(setCategory("clothes"))}
                     className="flex flex-col justify-center cursor-pointer items-center bg-amber-100 py-4 px-3.5 rounded-full border-amber-200 border">
                     <Shirt
-                        className="md:w-15 md:h-15 w-8 h-8" />
-                    <h2 className="md:text-xl text-md ">Clothes</h2>
+                        className="md:w-14 md:h-14 w-8 h-8" />
+                    <h2 className="md:text-lg text-md ">Clothes</h2>
                 </span>
                 <span
                     onClick={() => navigate("/products/category") && dispatch(setCategory("shoes"))}
                     className="flex flex-col justify-center cursor-pointer items-center bg-amber-100 py-4 px-5 rounded-full border-amber-200 border">
-                    <Footprints className="md:w-15 md:h-15 w-8 h-8" />
-                    <h2 className="md:text-xl text-md">Shoes</h2>
+                    <Footprints className="md:w-14 md:h-14 w-8 h-8" />
+                    <h2 className=" md:text-lg text-md">Shoes</h2>
                 </span>
                 <span
                     onClick={() => navigate("/products/category") && dispatch(setCategory("electronics"))}
                     className="flex flex-col justify-center cursor-pointer items-center bg-amber-100 py-4 px-3.5  rounded-full border-amber-200 border">
-                    <Speaker className="md:w-15 md:h-15 w-8 h-8" />
-                    <h2 className="md:text-xl text-md">Gadgets</h2>
+                    <Speaker className="md:w-14 md:h-14 w-8 h-8" />
+                    <h2 className="md:text-lg text-md">Gadgets</h2>
                 </span>
                 <span
                     onClick={() => navigate("/products/category") && dispatch(setCategory("all"))}
                     className="flex flex-col justify-center cursor-pointer items-center bg-amber-100 py-4 px-4.5  rounded-full border-amber-200 border">
-                    <Box className="md:w-15 md:h-15 w-8 h-8" />
-                    <h2 className="md:text-xl text-md">Others</h2>
+                    <Box className="md:w-14 md:h-14 w-8 h-8" />
+                    <h2 className="md:text-lg text-md">Others</h2>
                 </span>
             </div>
         </section>

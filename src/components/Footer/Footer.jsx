@@ -19,7 +19,7 @@ function Footer() {
         </div>
         <div className="w-full lg:w-2/3 flex  md:flex-row flex-wrap lg:flex-nowrap gap-20 lg:gap-30 justify-center items-start">
           <div className="flex flex-col gap-8 mb-10 md:mb-0">
-            <h4 className="text-gray-500 text-md font-semibold">Link</h4>
+            <h1 className="text-gray-500 text-md font-semibold">Link</h1>
             <ul className="flex flex-col gap-8 font-medium">
               <li>
                 <NavLink to="/">Home</NavLink>
@@ -36,7 +36,7 @@ function Footer() {
             </ul>
           </div>
           <div className="flex flex-col gap-8 mb-10 md:mb-0">
-            <h4 className="text-gray-500 text-md font-semibold">Help</h4>
+            <h1 className="text-gray-500 text-md font-semibold">Help</h1>
             <ul className="flex flex-col gap-8 font-medium">
               <li>Payment Options</li>
               <li>Return</li>
@@ -44,7 +44,7 @@ function Footer() {
             </ul>
           </div>
           <form className="flex flex-col gap-8">
-            <h4 className="text-gray-500 text-md font-semibold">Newsletter</h4>
+            <h1 className="text-gray-500 text-md font-semibold">Newsletter</h1>
             <div className="flex flex-wrap gap-3">
               <input
                 type="email"

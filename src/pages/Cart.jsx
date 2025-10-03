@@ -91,6 +91,7 @@ function Cart() {
                     <div>
                       <div className="inline-flex items-center border border-gray-200 rounded-md">
                         <button
+                          type="button"
                           className="w-8 h-8 flex items-center justify-center hover:bg-gray-50 cursor-pointer"
                           onClick={() =>
                             dispatch(
@@ -110,6 +111,7 @@ function Cart() {
                           {product.qty.quantity}
                         </span>
                         <button
+                          type="button"
                           className="w-8 h-8 flex items-center justify-center hover:bg-gray-50 cursor-pointer"
                           onClick={() =>
                             dispatch(
@@ -128,6 +130,7 @@ function Cart() {
                     {/* Remove Button */}
                     <div className="flex justify-center absolute right-0 top-0 sm:relative">
                       <button
+                        type="button"
                         className="p-2 hover:text-red-500 transition-colors"
                         onClick={() => {
                           dispatch(removeProduct(product.id.productId));
@@ -157,6 +160,7 @@ function Cart() {
                   <span className="font-medium text-teal-800">${subTotal}</span>
                 </div>
                 <button
+                  type="button"
                   onClick={() =>
                     cartProduct.length > 0 && navigate("/checkout")
                   }
