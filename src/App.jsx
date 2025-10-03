@@ -6,6 +6,7 @@ import ScrollToTop from "./util/Scroll to Top/ScrollToTop";
 import Footer from "./components/Footer/Footer";
 import authService from '../src/appwrite/auth'
 import { logIn, logOut } from '../src/features/authSlice'
+import TopDiscountBar from "./components/Top Discount Bar/TopDiscountBar";
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
       {!loading ? (
         <div className="cursor-default">
           <ScrollToTop />
+          <TopDiscountBar/>
           <NavBar />
           <Outlet />
           <Footer />
