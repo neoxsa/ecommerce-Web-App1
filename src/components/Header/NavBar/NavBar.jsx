@@ -17,7 +17,8 @@ function NavBar() {
     setHamMenu((prev) => !prev);
   };
 
-  const navIconClass = `h-8 w-8 xl:h-9 xl:w-9 hover:rounded-full cursor-pointer hover:bg-gray-100 active:bg-gray-100 transition-colors duration-200 p-1`;
+  const navIconClass = `h-8 w-8 xl:h-9 xl:w-9 hover:rounded-full cursor-pointer hover:bg-gray-100 active:bg-gray-100 hover:scale-105 transition-all duration-200 p-1`;
+
 
   return (
     <>
@@ -25,7 +26,7 @@ function NavBar() {
 
         <div className="flex items-center justify-center gap-2 sm:gap-3 lg:gap-4">
 
-          <div className="lg:hidden">
+          <div className="lg:hidden transition-all duration-300 ease-in-out">
             {!hamMenu ? (
               <Menu
                 className="w-9 h-9  hover:bg-gray-100 active:bg-gray-100 rounded-full p-1 cursor-pointer transition-colors duration-200"
@@ -34,15 +35,14 @@ function NavBar() {
             ) : (
               <X
                 className="w-9 h-9  hover:bg-gray-100 active:bg-gray-100 rounded-full p-1 cursor-pointer transition-colors duration-200"
-                onClick={() => menuToggle()}
+                onClick={menuToggle}
               />
             )}
             {hamMenu && <SideNavBar closeLinkClick={menuToggle} />}
           </div>
 
-
           <div
-            className={`${search ? "hidden md:block" : "block"} transition-all duration-300`}
+            className={`${search ? "opacity-0 md:opacity-100" : "opacity-100"} transition-all duration-200 ease-in-out`}
           >
             <Link to="/" className="block">
               <img
@@ -139,7 +139,7 @@ function NavBar() {
             )}
           </div>
 
-          <div className={`${search ? " md:flex" : "flex"} items-center`}>
+          <div className={`${search ? " md:flex" : "flex"} items-center transition-all duration-200`}>
             {authStatus ? (
               <Link
                 to="/profile"
@@ -160,19 +160,21 @@ function NavBar() {
           </div>
 
 
-          <div className={`${search ? " hidden md:flex" : "flex"} items-center`}>
+          <div className={`${search ? " md:flex" : "flex"} items-center transition-all duration-200`}>
             <Link
               to="/cart"
-              className="p-1 hover:bg-gray-100  rounded-full transition-colors duration-200 relative"
+              className="p-1 hover:bg-gray-100  rounded-full transition-colors duration-200"
               aria-label="Shopping cart"
             >
-              <ShoppingBag className={navIconClass} />
+             <div className="relative">
+               <ShoppingBag className={navIconClass} />
 
               <span
-                className={`absolute ${search ? "-top-0.5 -right-0.5 md:-top-1 md:-right-1" : "-top-1 -right-1"} bg-teal-600 text-white text-xs rounded-full h-4 w-4 md:h-5 md:w-5 flex items-center justify-center font-medium text-[10px] md:text-xs transition-all duration-200`}
+                  className={`absolute ${search ? "-top-0.5 -right-0.5 md:-top-1 md:-right-1" : "-top-1 -right-1"} bg-teal-600 text-white text-xs rounded-full h-4 w-4 md:h-5 md:w-5 flex items-center justify-center font-medium text-[10px] md:text-xs transition-all duration-200 hover:scale-110`}
               >
                 {cartCount}
               </span>
+             </div>
             </Link>
           </div>
         </div>
