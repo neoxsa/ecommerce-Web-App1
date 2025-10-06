@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeProduct, updateQty } from "../features/productToCart";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { useCallback } from "react";
 
 function Cart() {
   const cartProduct = useSelector((state) => state.ProductToCart.products);
@@ -40,7 +39,7 @@ function Cart() {
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Cart Items */}
+
           <div className="w-full lg:w-2/3">
             {/* Header */}
             <div className="hidden sm:grid grid-cols-5 gap-4 items-center p-4 bg-amber-50 rounded-lg text-sm font-medium">
@@ -58,7 +57,6 @@ function Cart() {
               </div>
             )}
 
-            {/* Cart Items */}
             <div className="space-y-4 mt-4">
               {cartProduct.map((product) => (
                 <div
@@ -66,7 +64,7 @@ function Cart() {
                   className="bg-white rounded-lg relative flex justify-center shadow-sm p-4"
                 >
                   <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 items-center">
-                    {/* Product Image */}
+
                     <div className="col-span-2 sm:col-span-1 ">
                       <img
                         className="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-lg mx-auto"
@@ -75,19 +73,16 @@ function Cart() {
                       />
                     </div>
 
-                    {/* Product Name */}
                     <div className="col-span-2 sm:col-span-1">
                       <p className="text-sm font-medium text-center inline-flex flex-wrap w-52 sm:w-auto">
                         {product.name.productTitle}
                       </p>
                     </div>
 
-                    {/* Price */}
                     <div className="text-sm font-medium">
                       ${product.price.sellingPrice}
                     </div>
 
-                    {/* Quantity Controls */}
                     <div>
                       <div className="inline-flex items-center border border-gray-200 rounded-md">
                         <button
@@ -127,7 +122,6 @@ function Cart() {
                       </div>
                     </div>
 
-                    {/* Remove Button */}
                     <div className="flex justify-center absolute right-0 top-0 sm:relative">
                       <button
                         type="button"

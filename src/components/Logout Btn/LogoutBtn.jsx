@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux"
 function LogoutBtn({
     className = "",
     closeLinkClick,
+    buttonText,
     ...props
 }) {
     const dispatch = useDispatch();
@@ -21,13 +22,16 @@ function LogoutBtn({
 
     return (
         <button
-            className={`inline-block bg-red-400 text-lg w-auto p-4 ${className}`}
+            className={`px-4 py-2 rounded-md border border-gray-300 hover:bg-red-400 text-sm ${className}`}
             {...props}
-            onClick={() => logOutHandler() && navigate('/')}
+            onClick={() => {
+                logOutHandler();
+                navigate('/login')
+            }}
         >
-            <div className=" flex justify-center items-center gap-2 text-white font-semibold">
+            <div className=" flex justify-center items-center gap-2 font-semibold">
                 <LogOutIcon />
-                <span>Logout</span>
+                <span>{buttonText}</span>
             </div>
         </button>
     )
