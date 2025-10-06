@@ -8,6 +8,7 @@ function LogoutBtn({
     className = "",
     closeLinkClick,
     buttonText,
+    type,
     ...props
 }) {
     const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function LogoutBtn({
 
     return (
         <button
+            type={type}
             className={`px-4 py-2 rounded-md border border-gray-300 hover:bg-red-400 text-sm ${className}`}
             {...props}
             onClick={() => {
