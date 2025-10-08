@@ -14,9 +14,9 @@ export class AuthService {
     }
 
     // Create User / Sign Up
-    async createUser({ email, name, password }) {
+    async createUser({ email, name, password, phone, prefs }) {
         try {
-            const userAccount = await this.account.create(ID.unique(), email, password, name);
+            const userAccount = await this.account.create(ID.unique(), email, password, name, phone, prefs);
             if (userAccount) {
                 // direct login after creation done
                 return this.logIn({ email, password })
@@ -24,7 +24,7 @@ export class AuthService {
                 return userAccount;
             }
         } catch (error) {
-            throw error
+            console.log("User creation error::", error)
         }
     }
 
@@ -34,7 +34,7 @@ export class AuthService {
             return await this.account.createEmailPasswordSession(email, password);
 
         } catch (error) {
-            throw error
+            console.log("Login error::", error)
         }
     }
 
@@ -43,9 +43,34 @@ export class AuthService {
         try {
             return await this.account.get();
         } catch (error) {
-            throw error
+            console.log("Error current user::", error);
         }
         return null; // if there is any error in trycatch
+    }
+
+    // Update User
+    async updateUserProfile({ name, email, password, phone, prefs }) {
+        try {
+            const updates = []
+            if (name) { updates?.push(this.account.updateName(name)) }
+            if (prefs) { updates?.push(this.account.updatePrefs(prefs)) }
+
+            if (updates.length > 0) {
+                await Promise.all(updates);
+            }
+
+            if (email && password) { await this.account.updateEmail(email, password) }
+            if (phone && password) { await this.account.updatePhone(phone, password) }
+
+
+
+
+            return await this.getCurrentUser(); //return updated user data
+
+        } catch (error) {
+            console.log("Update failed::", error);
+            alert('Failed to update profile')
+        }
     }
 
     // Log Out
@@ -53,7 +78,7 @@ export class AuthService {
         try {
             await this.account.deleteSessions();
         } catch (error) {
-            throw error
+            console.log("Logout error::", error)
         }
     }
 }
