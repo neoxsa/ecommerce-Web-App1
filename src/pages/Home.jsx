@@ -22,6 +22,13 @@ function Home() {
         <section className="flex justify-center items-center flex-col text-gray-950 gap-15 mb-10">
           <h1 className="text-3xl font-bold">Our Products</h1>
           <div className="sm:grid flex justify-center flex-col sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 p-4">
+
+            {isError && (
+              <div className="text-red-500">
+                Something went wrong: {error.error}
+              </div>
+            )}
+
             {isLoading || isError
               ? Array.from({ length: 8 }).map((_, index) => (
                 <ProductCard
@@ -50,12 +57,6 @@ function Home() {
                 </Link>
               ))}
           </div>
-
-          {isError && (
-            <div className="text-red-500">
-              Something went wrong: {error.error}
-            </div>
-          )}
 
           <button
             onClick={() => navigate("/products")}
