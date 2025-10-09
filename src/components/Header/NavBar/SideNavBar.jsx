@@ -74,13 +74,7 @@ function SideNavBar({
                         </div>)
                     }
 
-                    {
-                        authStatus && (
-                            <LogoutBtn
-                                className='absolute bottom-30 w-auto text-center rounded-full '
-                            />
-                        )
-                    }
+                    
                 </nav>
             </section>
         </>
