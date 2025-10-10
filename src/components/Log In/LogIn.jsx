@@ -21,7 +21,8 @@ function LogIn() {
   const [showPassword, setShowPassword] = useState(false);
   const authStatus = useSelector(state => state.auth.status)
   useEffect(() => {
-    authStatus && navigate('/')
+    authStatus && navigate('/');
+
   }, [authStatus, navigate])
 
   // Login form handler

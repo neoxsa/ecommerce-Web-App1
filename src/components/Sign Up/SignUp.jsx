@@ -105,7 +105,8 @@ function SignUp() {
               >Phone:</label>
               <input
                 type="tel"
-                className={`w-60 md:w-80 rounded-lg p-2 font-medium outline-2 focus:outline-3 focus:outline-teal-800 ${error.includes('email') || errors.email ? 'outline-red-600 ' : 'outline-2'}`}
+                className={`w-60 md:w-80 rounded-lg p-2 font-medium outline-2 focus:outline-3 focus:outline-teal-800 
+                  ${error.includes('phone') || errors.phone ? 'outline-red-600 ' : 'outline-2'}`}
                 {...register('phone', {
                   required: true
                 })}

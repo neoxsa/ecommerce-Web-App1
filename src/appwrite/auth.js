@@ -14,9 +14,9 @@ export class AuthService {
     }
 
     // Create User / Sign Up
-    async createUser({ email, name, password, phone, prefs }) {
+    async createUser({ email, name, password, phone }) {
         try {
-            const userAccount = await this.account.create(ID.unique(), email, password, name, phone, prefs);
+            const userAccount = await this.account.create(ID.unique(), email, password, name, phone);
             if (userAccount) {
                 // direct login after creation done
                 return this.logIn({ email, password })
@@ -31,8 +31,8 @@ export class AuthService {
     // Log In
     async logIn({ email, password }) {
         try {
-            return await this.account.createEmailPasswordSession(email, password);
-
+            return await this.account.createEmailPasswordSession(email, password) 
+            && window.location.reload()
         } catch (error) {
             console.log("Login error::", error)
         }
@@ -61,9 +61,6 @@ export class AuthService {
 
             if (email && password) { await this.account.updateEmail(email, password) }
             if (phone && password) { await this.account.updatePhone(phone, password) }
-
-
-
 
             return await this.getCurrentUser(); //return updated user data
 
