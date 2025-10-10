@@ -3,19 +3,19 @@ import { ArrowRight } from 'lucide-react'
 import heroImage from '../../assets/hero img/heroImage.webp'
 
 function Breadcrumb({
-    toRoute ='',
-    pageName=''
+  toRoute = '',
+  pageName = ''
 }) {
   return (
     <div>
-      <div className='relative h-80 flex items-center justify-center w-full'>
+      <div className='relative h-52 md:h-80 flex items-center justify-center w-full'>
         <img
-          className=' w-full h-80 object-cover opacity-70 blur-[1.2px]'
-          src={heroImage} 
-          alt="heroImage" 
+          className=' w-full h-52 md:h-80 object-cover opacity-70 blur-[1.2px]'
+          src={heroImage}
+          alt="heroImage"
           loading='eager'
           fetchPriority='high'
-          />
+        />
 
         <div className='absolute flex w-full h-full flex-col justify-center items-center'>
           <h1 className='text-5xl font-semibold'>{pageName}</h1>
