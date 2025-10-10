@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom'
 import ProductCard from '../components/Product Card/ProductCard'
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb'
 import FooterStripe from '../components/Footer Stripe/FooterStripe'
+import { useSelector } from 'react-redux'
 
 function CategoryProducts() {
     const { data: products, isLoading, error, isError } = useGetProductsQuery()
-    const [selectedFilter, setSelectedFilter] = useState("");
     const [filterProducts, setFilterProducts] = useState([])
     const [priceToggle, setPriceToggle] = useState(1)
+    const items = useSelector(state => state.category)
+
 
     useEffect(() => {
         if (!products) {
@@ -19,16 +21,15 @@ function CategoryProducts() {
 
         let updatedProducts = [...products];
 
-        if (selectedFilter === "clothesFilter") {
+        if (items.category === "All") {
+            setFilterProducts(products);
+        } else if (items.category === "Clothes") {
             updatedProducts = updatedProducts.filter((product) => product.category.name === "Clothes");
-        } else if (selectedFilter === "shoesFilter") {
+        } else if (items.category === "Shoes") {
             updatedProducts = updatedProducts.filter((product) => product.category.name === "Shoes");
-        } else if (selectedFilter === "electronicsFilter") {
+        } else if (items.category === "Electronics") {
             updatedProducts = updatedProducts.filter((product) => product.category.name === "Electronics");
-        } else if (selectedFilter === "furnitureFilter") {
-            updatedProducts = updatedProducts.filter((product) => product.category.name === "Furniture");
         }
-
 
         if (priceToggle === 2) {
             updatedProducts = [...updatedProducts].sort((a, b) => b.price - a.price);
@@ -38,11 +39,8 @@ function CategoryProducts() {
 
         setFilterProducts(updatedProducts);
 
-    }, [products, selectedFilter, priceToggle]);
+    }, [products, priceToggle]);
 
-    const handleSelectChange = (value) => {
-        setSelectedFilter(value);
-    }
 
     return (
         <>
@@ -75,22 +73,6 @@ function CategoryProducts() {
                         />
                         <span>High</span>
                     </div>
-                </div>
-
-                <div>
-                    <label htmlFor='filter' className='font-medium'>Category :</label>
-                    <select
-                        id="filter"
-                        className='ml-4 border-2 border-green-600 rounded p-1'
-                        onChange={(e) => handleSelectChange(e.target.value)}
-                    >
-                        <option value="none" className='text-gray-400'>Select</option>
-                        <option value="">All</option>
-                        <option value="clothesFilter">Clothes</option>
-                        <option value="shoesFilter">Shoes</option>
-                        <option value="electronicsFilter">Electronics</option>
-                        <option value="furnitureFilter">Furniture</option>
-                    </select>
                 </div>
 
             </div>

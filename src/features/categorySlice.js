@@ -14,11 +14,8 @@ const categorySlice = createSlice({
             state.category = action.payload;
             sessionStorage.setItem("category", action.payload);
         },
-        removeCategory: () => {
-            return initialState;
-        }
     }
 })
 
-export const { setCategory, removeCategory } = categorySlice.actions;
+export const { setCategory } = categorySlice.actions;
 export default categorySlice.reducer;
