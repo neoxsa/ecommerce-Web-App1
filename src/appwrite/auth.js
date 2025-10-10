@@ -32,7 +32,7 @@ export class AuthService {
     async logIn({ email, password }) {
         try {
             return await this.account.createEmailPasswordSession(email, password) 
-            && window.location.reload()
+            // && window.location.reload()
         } catch (error) {
             console.log("Login error::", error)
         }
