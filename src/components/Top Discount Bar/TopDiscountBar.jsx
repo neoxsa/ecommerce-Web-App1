@@ -26,6 +26,7 @@ function TopDiscountBar() {
         </section>
         <button
           onClick={closeHandler}
+          type="button"
           className="my-auto rounded-full cursor-pointer"
         >
           <XCircle className="text-gray-500 hover:text-red-400 active:text-red-500" />
