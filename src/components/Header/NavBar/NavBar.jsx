@@ -125,6 +125,7 @@ function NavBar() {
             {!search ? (
               <button
                 onClick={() => setSearch(true)}
+                type="button"
                 className="p-1 hover:bg-gray-100 rounded-full transition-colors duration-200"
                 aria-label="Open search"
               >

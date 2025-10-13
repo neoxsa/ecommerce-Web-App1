@@ -92,14 +92,9 @@ function Cart() {
                             dispatch(
                               updateQty({
                                 productId: product.id.productId,
-                                quantity:
-                                  product.qty.quantity > 1
-                                    ? product.qty.quantity - 1
-                                    : 1,
+                                quantity: product.qty.quantity > 1 ? product.qty.quantity - 1 : 1,
                               }),
-                            )
-                          }
-                        >
+                            )}>
                           -
                         </button>
                         <span className="w-10 text-center border-x py-1">
@@ -159,10 +154,9 @@ function Cart() {
                     cartProduct.length > 0 && navigate("/checkout")
                   }
                   className={`w-full py-3 px-4 rounded-lg transition-all duration-200
-                    ${
-                      cartProduct.length > 0
-                        ? "bg-teal-600 text-white hover:bg-teal-700"
-                        : "bg-gray-200 text-gray-500 cursor-not-allowed"
+                    ${cartProduct.length > 0
+                      ? "bg-teal-600 text-white hover:bg-teal-700"
+                      : "bg-gray-200 text-gray-500 cursor-not-allowed"
                     }`}
                 >
                   Proceed to Checkout
