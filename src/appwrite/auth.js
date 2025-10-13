@@ -24,17 +24,19 @@ export class AuthService {
                 return userAccount;
             }
         } catch (error) {
-            console.log("User creation error::", error)
+            console.log("User creation error::", error);
+            alert("Email, or Phone already exists");
         }
     }
 
     // Log In
     async logIn({ email, password }) {
         try {
-            return await this.account.createEmailPasswordSession(email, password) 
-            // && window.location.reload()
+            
+            return await this.account.createEmailPasswordSession(email, password)
         } catch (error) {
             console.log("Login error::", error)
+            alert("Invalid password or email")
         }
     }
 
@@ -45,7 +47,7 @@ export class AuthService {
         } catch (error) {
             console.log("Error current user::", error);
         }
-        return null; // if there is any error in trycatch
+        return null;
     }
 
     // Update User

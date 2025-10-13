@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
-import heroImage from '../../assets/hero img/heroImage.webp'
+import heroImage from '../../assets/hero-img/heroImage.webp'
 
 function Breadcrumb({
   toRoute = '',

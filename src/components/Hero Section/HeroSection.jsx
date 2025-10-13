@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import heroImage from "../../assets/hero img/heroImage.webp";
+import heroImage from "../../assets/hero-img/heroImage.webp";
 
 function HeroSection() {
   const navigate = useNavigate();
