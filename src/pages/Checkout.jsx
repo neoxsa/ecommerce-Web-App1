@@ -1,36 +1,123 @@
 import { useState, useEffect } from 'react'
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import authService from '../appwrite/auth'
+import { logIn } from '../features/authSlice'
+import spinner from '../assets/spinner.gif'
 
 const schema = yup.object().shape({
-    createdOn: yup.date().default(() => new Date()),
-    firstName: yup.string().required('First name is required'),
-    lastName: yup.string().required('Last name is required'),
-    companyName: yup.string(),
-    countryOrRegion: yup.string().required('Country/Region is required'),
-    streetAddress: yup.string().required('Street Address is required'),
-    townCity: yup.string().required('Town/City is required'),
+    name: yup.string().required("Name is required"),
+    address: yup.string().required('address Address is required'),
     postalCode: yup.string().required('Postal Code required').matches(/^\d{6}$/, 'Postal Code must be in 6 digits'),
-    phone: yup.string().matches(/^\d{10}$/, 'Phone Number must be in 10 digits').required('Phone number is required'),
-    email: yup.string().email('Invalid email').required('Email Required')
+    phone: yup.string().required('Phone number is required'),
+    email: yup.string().email('Invalid email').required('Email Required'),
+    currentPassword: yup.string(),
+    city: yup.string().required('City is required'),
+    state: yup.string().required('State is required'),
+    country: yup.string().required('Country is required'),
 })
 
 function Checkout() {
     const [shippingCharge, setShippingCharge] = useState(0)
     const [paymentMethod, setPaymentMethod] = useState('')
+    const [user, setUser] = useState(null)
+    const [loading, setLoading] = useState(true)
 
+    const dispatch = useDispatch()
     const products = useSelector(state => state.ProductToCart.products)
+    const { register, handleSubmit, formState: { errors }, watch, reset } = useForm({
+        resolver: yupResolver(schema),
+        defaultValues: {
+            name: "",
+            email: "",
+            phone: "",
+            address: "",
+            city: "",
+            state: "",
+            postalCode: "",
+            country: "",
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema)
+        }
     })
 
-    const submitHandler = (data) => {
-        console.log(data)
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const userData = await authService.getCurrentUser();
+                setUser(userData);
+                dispatch(logIn(userData));
+            } catch (error) {
+                console.log(error)
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchUser();
+    }, [dispatch])
+
+    useEffect(() => {
+        if (user) {
+            reset({
+                name: user?.name || "",
+                email: user?.email || "",
+                phone: user?.phone || "",
+                address: user?.prefs?.address || "",
+                city: user?.prefs?.city || "",
+                state: user?.prefs?.state || "",
+                postalCode: user?.prefs?.postalCode || "",
+                country: user?.prefs?.country || "",
+            })
+        }
+    }, [user, reset]);
+
+    const watchEmail = watch("email");
+    const watchPhone = watch("phone");
+
+    const dataChange = watchEmail !== user?.email || watchPhone !== user?.phone
+
+    const onSubmit = async (data) => {
+        try {
+            const updatedUser = await authService.updateUserProfile({
+                name: data.name,
+                email: data.email,
+                phone: data.phone,
+                password: data.currentPassword,
+                prefs: {
+                    birthday: user?.prefs?.birthday,
+                    address: data.address,
+                    city: data.city,
+                    state: data.state,
+                    postalCode: data.postalCode,
+                    country: data.country,
+                },
+            })
+            setUser(updatedUser);
+            dispatch(logIn(updatedUser));
+
+            reset({
+                name: updatedUser?.name,
+                email: updatedUser?.email,
+                phone: updatedUser?.phone,
+                currentPassword: "",
+                birthday: updatedUser?.prefs?.birthday || "",
+                address: updatedUser?.prefs?.address || "",
+                city: updatedUser?.prefs?.city || "",
+                state: updatedUser?.prefs?.state || "",
+                postalCode: updatedUser?.prefs?.postalCode || "",
+                country: updatedUser?.prefs?.country || "",
+            });
+
+            alert('Profile updated and order placed successfully!');
+
+        } catch (error) {
+            console.log("Data Fetch Error::", error)
+        }
     }
+
+    console.log("update user::", user)
 
     const subTotal =
         products.reduce((total, item) =>
@@ -39,12 +126,26 @@ function Checkout() {
     useEffect(() => {
         setShippingCharge(products.length > 0 ? 15 : 0);
         subTotal >= 150 && setShippingCharge(0)
-    }, [products])
+    }, [products, subTotal])
 
     const grandTotal = subTotal + shippingCharge
 
     const labelClass = `text-sm sm:text-md font-medium text-gray-700`
     const inputClass = `w-full border rounded-lg px-4 py-3 focus:ring-2 focus:ring-teal-700 focus:border-transparent outline-none`
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <div className="text-lg">
+                    <img className="w-40 h-40 " src={spinner} alt="loading" />
+                </div>
+            </div>
+        );
+    }
+
+    if (!user) {
+        return null;
+    }
 
     return (
         <>
@@ -58,70 +159,83 @@ function Checkout() {
                     {/* Left */}
                     <section className='w-full lg:w-[40%]'>
                         <h1 className='text-2xl sm:text-3xl lg:text-4xl font-semibold mb-6 sm:mb-8'>Billing Details</h1>
-                        <form onSubmit={handleSubmit(submitHandler)} className='space-y-4 sm:space-y-6'>
+                        <form onSubmit={handleSubmit(onSubmit)} className='space-y-4 sm:space-y-6'>
                             <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
-                                <div className='space-y-2'>
-                                    <label className={labelClass}>First Name <span className='text-red-500'>*</span></label>
+                                <div className='space-y-2 col-span-2'>
+                                    <label className={labelClass}>Name <span className='text-red-500'>*</span></label>
                                     <input
                                         type="text"
                                         className={inputClass}
-                                        {...register('firstName')}
+                                        {...register('name')}
                                     />
-                                    {errors.firstName && <p className='text-red-500'>{errors.firstName.message}</p>}
+                                    {errors.name && <p className='text-red-500'>{errors.name.message}</p>}
                                 </div>
-                                <div className='space-y-2'>
-                                    <label className={labelClass}>Last Name <span className='text-red-500'>*</span></label>
-                                    <input
-                                        type="text"
-                                        className={inputClass}
-                                        {...register('lastName')}
-                                    />
-                                    {errors.lastName && <p className='text-red-500'>{errors.lastName.message}</p>}
-
-                                </div>
-                            </div>
-                            <div className='space-y-2'>
-                                <label className={labelClass}>Company Name (Optional)</label>
-                                <input
-                                    type="text"
-                                    className={inputClass}
-                                    {...register('companyName')}
-                                />
-                                {errors.companyName && <p className='text-red-500'>{errors.companyName.message}</p>}
 
                             </div>
-
                             <div className='space-y-2'>
-                                <label className={labelClass}>Country/Region <span className='text-red-500'>*</span></label>
+                                <label className={labelClass}>Email <span className='text-red-500'>*</span></label>
                                 <input
-                                    type="text"
+                                    type="email"
                                     className={inputClass}
-                                    {...register('countryOrRegion')}
+                                    {...register('email')}
                                 />
-                                {errors.countryOrRegion && <p className='text-red-500'>{errors.countryOrRegion.message}</p>}
+                                {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
+
+                            </div>
+                            <div className='space-y-2'>
+                                <label className={labelClass}>Phone <span className='text-red-500'>*</span></label>
+                                <input
+                                    type="tel"
+                                    className={inputClass}
+                                    {...register('phone')}
+                                />
+                                {errors.phone && <p className='text-red-500'>{errors.phone.message}</p>}
 
                             </div>
 
+
+
                             <div className='space-y-2'>
-                                <label className={labelClass}>Street address <span className='text-red-500'>*</span></label>
+                                <label className={labelClass}>Address <span className='text-red-500'>*</span></label>
                                 <input
                                     type="text"
                                     className={inputClass}
-                                    {...register('streetAddress')}
+                                    {...register('address')}
                                 />
-                                {errors.streetAddress && <p className='text-red-500'>{errors.streetAddress.message}</p>}
+                                {errors.addressAddress && <p className='text-red-500'>{errors.addressAddress.message}</p>}
 
                             </div>
 
                             <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
                                 <div className='space-y-2'>
-                                    <label className={labelClass}>Town/City <span className='text-red-500'>*</span></label>
+                                    <label className={labelClass}>City <span className='text-red-500'>*</span></label>
                                     <input
                                         type="text"
                                         className={inputClass}
-                                        {...register('townCity')}
+                                        {...register('city')}
                                     />
-                                    {errors.townCity && <p className='text-red-500'>{errors.townCity.message}</p>}
+                                    {errors.city && <p className='text-red-500 text-sm'>{errors.city.message}</p>}
+                                </div>
+
+                                <div className='space-y-2'>
+                                    <label className={labelClass}>State <span className='text-red-500'>*</span></label>
+                                    <input
+                                        type="text"
+                                        className={inputClass}
+                                        {...register('state')}
+                                    />
+                                    {errors.state && <p className='text-red-500 text-sm'>{errors.state.message}</p>}
+                                </div>
+                            </div>
+                            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+                                <div className='space-y-2'>
+                                    <label className={labelClass}>Country <span className='text-red-500'>*</span></label>
+                                    <input
+                                        type="text"
+                                        className={inputClass}
+                                        {...register('country')}
+                                    />
+                                    {errors.country && <p className='text-red-500'>{errors.country.message}</p>}
 
                                 </div>
                                 <div className='space-y-2'>
@@ -134,29 +248,23 @@ function Checkout() {
                                     {errors.postalCode && <p className='text-red-500'>{errors.postalCode.message}</p>}
 
                                 </div>
+                                {
+                                    dataChange && (
+                                        <div className='space-y-2 col-span-2'>
+                                            <label className={labelClass}>Password <span className='text-red-500'>*</span></label>
+                                            <input
+                                                type="password"
+                                                className={inputClass}
+                                                {...register('currentPassword')}
+                                            />
+                                            {errors.currentPassword && <p className='text-red-500'>{errors.currentPassword.message}</p>}
+
+                                        </div>
+                                    )
+                                }
                             </div>
 
-                            <div className='space-y-2'>
-                                <label className={labelClass}>Phone <span className='text-red-500'>*</span></label>
-                                <input
-                                    type="tel"
-                                    className={inputClass}
-                                    {...register('phone')}
-                                />
-                                {errors.phone && <p className='text-red-500'>{errors.phone.message}</p>}
 
-                            </div>
-
-                            <div className='space-y-2'>
-                                <label className={labelClass}>Email address <span className='text-red-500'>*</span></label>
-                                <input
-                                    type="email"
-                                    className={inputClass}
-                                    {...register('email')}
-                                />
-                                {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
-
-                            </div>
 
                             <div className='mt-8 space-y-6'>
                                 <div>
@@ -259,9 +367,10 @@ function Checkout() {
                                             </div>
                                             <div className='flex justify-between items-center'>
                                                 <span>Delivery Charges</span>
-                                                {shippingCharge === 0 ? (<p className='text-green-600 '>
-                                                    Free
-                                                </p>) : (<span >${shippingCharge}</span>)}
+                                                {shippingCharge === 0 ? (<span >
+                                                    <span className='text-green-600 '>Free </span>
+                                                    <span className='line-through text-gray-600'>$15</span>
+                                                </span>) : (<span >${shippingCharge}</span>)}
 
                                             </div>
                                             <div className='flex justify-between items-center pt-3 border-t border-gray-200'>
