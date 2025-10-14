@@ -117,7 +117,7 @@ function Checkout() {
         }
     }
 
-    console.log("update user::", user)
+    // console.log("user:", user)
 
     const subTotal =
         products.reduce((total, item) =>

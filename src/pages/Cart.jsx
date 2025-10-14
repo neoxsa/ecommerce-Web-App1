@@ -10,7 +10,8 @@ function Cart() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const userStatus = useSelector((state) => state.auth.status);
+  
   const subTotal = cartProduct.reduce(
     (total, item) => total + item.price.sellingPrice * item.qty.quantity,
     0,
@@ -148,19 +149,31 @@ function Cart() {
                   <span className="text-gray-600">Total</span>
                   <span className="font-medium text-teal-800">${subTotal}</span>
                 </div>
-                <button
-                  type="button"
-                  onClick={() =>
-                    cartProduct.length > 0 && navigate("/checkout")
-                  }
-                  className={`w-full py-3 px-4 rounded-lg transition-all duration-200
+                {
+                  userStatus ? (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        cartProduct.length > 0 && navigate("/checkout")
+                      }
+                      className={`w-full py-3 px-4 rounded-lg transition-all duration-200
                     ${cartProduct.length > 0
-                      ? "bg-teal-600 text-white hover:bg-teal-700"
-                      : "bg-gray-200 text-gray-500 cursor-not-allowed"
-                    }`}
-                >
-                  Proceed to Checkout
-                </button>
+                          ? "bg-teal-600 text-white hover:bg-teal-700"
+                          : "bg-gray-200 text-gray-500 cursor-not-allowed"
+                        }`}
+                    >
+                      Proceed to Checkout
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => navigate("/login")}
+                      className="w-full py-3 px-4 rounded-lg bg-teal-600 text-white hover:bg-teal-700 transition-all duration-200"
+                    >
+                      Login to Checkout
+                    </button>
+                  )
+                }
               </div>
             </div>
           </div>
