@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../../appwrite/auth";
 import { logIn as authLogin } from "../../features/authSlice";
+import { ToastContainer, toast } from 'react-toastify';
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -23,6 +24,8 @@ function LogIn() {
   });
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const notify = () => toast("Login successfully!", { type: "success" });
+
   const authStatus = useSelector((state) => state.auth.status);
 
   useEffect(() => {
@@ -35,8 +38,11 @@ function LogIn() {
     try {
       const session = await authService.logIn(data);
       if (session) {
+        notify();
         const userData = await authService.getCurrentUser();
-        if (userData) dispatch(authLogin(userData));
+        if (userData) {
+          dispatch(authLogin(userData));
+        }
         navigate("/");
       }
     } catch (error) {
@@ -44,14 +50,36 @@ function LogIn() {
     }
   };
 
+
   const passwordHandler = () => {
     setShowPassword((prev) => !prev);
+
   };
 
   console.log(errors);
 
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        closeButton={false}
+        pauseOnHover={false}
+        theme="colored"
+        toastStyle={{
+          backgroundColor: "#333",
+          color: "#fff",
+          fontSize: "16px",
+          fontWeight: "bold",
+          borderRadius: "8px",
+          boxShadow: "0 2px 10px rgba(0, 0, 0, 0.3)",
+        }}
+      />
       {!authStatus && (
         <div className=" flex-col space-y-3 inline-block rounded-md bg-amber-50 p-10 shadow-xl">
           <h2 className="mx-auto text-2xl md:text-3xl font-semibold text-center">

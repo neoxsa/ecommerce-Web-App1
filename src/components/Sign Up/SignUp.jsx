@@ -6,6 +6,7 @@ import authService from '../../appwrite/auth'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { ToastContainer, toast } from 'react-toastify'
 
 
 const schema = yup.object().shape({
@@ -24,6 +25,7 @@ function SignUp() {
   })
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const notify = () => toast("Sign Up successfully!", { type: "success" });
 
   useEffect(() => {
     authStatus && navigate('/')
@@ -37,6 +39,7 @@ function SignUp() {
       const session = await authService.createUser(data);
 
       if (session) {
+        notify();
         const user = await authService.getCurrentUser();
 
         if (user) dispatch(authLogin({ user }));
@@ -53,6 +56,26 @@ function SignUp() {
 
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        closeButton={false}
+        pauseOnHover={false}
+        theme="colored"
+        toastStyle={{
+          backgroundColor: "#333",
+          color: "#fff",
+          fontSize: "16px",
+          fontWeight: "bold",
+          borderRadius: "8px",
+          boxShadow: "0 2px 10px rgba(0, 0, 0, 0.3)",
+        }}
+      />
       {!authStatus && (
         <div className=" flex-col space-y-3 inline-block rounded-md bg-amber-50 p-10 shadow-xl">
           <h2 className="mx-auto text-2xl md:text-3xl  font-semibold text-center">
