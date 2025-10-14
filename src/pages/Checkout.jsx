@@ -8,6 +8,7 @@ import authService from '../appwrite/auth'
 import { logIn } from '../features/authSlice'
 import spinner from '../assets/spinner.gif'
 
+
 const schema = yup.object().shape({
     name: yup.string().required("Name is required"),
     address: yup.string().required('address Address is required'),
@@ -109,8 +110,7 @@ function Checkout() {
                 postalCode: updatedUser?.prefs?.postalCode || "",
                 country: updatedUser?.prefs?.country || "",
             });
-
-            alert('Profile updated and order placed successfully!');
+            alert('redirect to payment gateway (not implemented)');
 
         } catch (error) {
             console.log("Data Fetch Error::", error)
