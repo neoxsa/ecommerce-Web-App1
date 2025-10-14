@@ -17,15 +17,16 @@ const schema = yup.object().shape({
   phone: yup.string(),
   currentPassword: yup.string(),
   birthday: yup.string(),
-  street: yup.string(),
+  address: yup.string(),
   city: yup.string(),
   state: yup.string(),
   postalCode: yup.string(),
+  country: yup.string(),
 });
 
 function Profile() {
 
-  const { id } = useParams();
+  // const { id } = useParams();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -46,10 +47,11 @@ function Profile() {
       email: "",
       phone: "",
       birthday: "",
-      street: "",
+      address: "",
       city: "",
       state: "",
       postalCode: "",
+      country: "",
     },
   });
 
@@ -85,10 +87,11 @@ function Profile() {
         email: user?.email || "",
         phone: user?.phone || "",
         birthday: user?.prefs?.birthday || "",
-        street: user?.prefs?.street || "",
+        address: user?.prefs?.address || "",
         city: user?.prefs?.city || "",
         state: user?.prefs?.state || "",
         postalCode: user?.prefs?.postalCode || "",
+        country: user?.prefs?.country || "",
       });
     }
   }, [user, reset]);
@@ -107,10 +110,11 @@ function Profile() {
         password: data.currentPassword,
         prefs: {
           birthday: data.birthday,
-          street: data.street,
+          address: data.address,
           city: data.city,
           state: data.state,
           postalCode: data.postalCode,
+          country: data.country,
         },
 
       });
@@ -127,11 +131,13 @@ function Profile() {
         phone: updatedUser?.phone,
         currentPassword: "",
         birthday: updatedUser?.prefs?.birthday || "",
-        street: updatedUser?.prefs?.street || "",
+        address: updatedUser?.prefs?.address || "",
         city: updatedUser?.prefs?.city || "",
         state: updatedUser?.prefs?.state || "",
         postalCode: updatedUser?.prefs?.postalCode || "",
+        country: updatedUser?.prefs?.country || "",
       });
+
     } catch (error) {
       console.log("Update failed:", error);
       alert("Failed to update profile");
@@ -281,16 +287,19 @@ function Profile() {
 
             <div className="mt-6">
               <h3 className="text-md font-semibold mb-3">Address</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
+
+              <div className=" col-span-2">
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Street
+                    Address
                   </label>
                   <input
-                    {...register("street")}
+                    {...register("address")}
                     className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
                   />
                 </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     City
@@ -302,7 +311,7 @@ function Profile() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    State/Province
+                    State
                   </label>
                   <input
                     {...register("state")}
@@ -310,6 +319,15 @@ function Profile() {
                   />
                 </div>
                 <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Country
+                  </label>
+                  <input
+                    {...register("country")}
+                    className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  />
+                </div>
+                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Postal Code
                   </label>
