@@ -4,13 +4,14 @@ import { Pagination, Autoplay, EffectFade } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/effect-fade'
+import { useMemo } from 'react'
 
-const images = [
+const images = useMemo(() => [
   "https://img.freepik.com/free-photo/still-life-with-classic-shirts-hanger_23-2150828620.jpg?t=st=1755783923~exp=1755787523~hmac=ef510ff942d90b39abfad46d7090ff7f6a4c6d650cf22869089f38bbeeab5777&w=1060",
   "https://img.freepik.com/free-photo/still-life-spring-wardrobe-switch_23-2150478984.jpg?t=st=1755784039~exp=1755787639~hmac=7fecf7905dc1cde777a2c6213ccab0baceaf4d077db5a8bd283ed534b1f241ca&w=1060",
   "https://img.freepik.com/free-photo/pair-brown-leather-boots_1150-6005.jpg?t=st=1755784108~exp=1755787708~hmac=0d17bc4ad68af7ce82ef826dd04e56286445fac2d614c24cfee48f4082f01728&w=1060",
   "https://img.freepik.com/free-photo/man-grey-sweatshirt-black-pants_23-2151982086.jpg?t=st=1755784322~exp=1755787922~hmac=be8ff3d5d2b600bc2379e3c387555ec522ceddc54c66f7dbbfc851c2096ddf89&w=1060"
-]
+])
 
 function Carousel() {
 
