@@ -48,7 +48,7 @@ function ProductDetail({
         } else if (productType === "Electronics") {
             setProductSize([""]);
         }
-    }, [])
+    }, [productType])
 
     const btnTimeout = () => {
         setTimeout(() => {
@@ -57,11 +57,13 @@ function ProductDetail({
     }
 
     const decQutantityHandler = () => {
-        quantity > 1 && setQuantity(prev => prev - 1);
+        quantity > 1;
+        setQuantity(prev => prev - 1);
     }
 
     const incQutantityHandler = () => {
-        quantity >= 1 && setQuantity(prev => prev + 1);
+        quantity >= 1;
+        setQuantity(prev => prev + 1);
     }
 
     const notify = () => toast("Added to cart!", { type: "success" });
@@ -141,7 +143,7 @@ function ProductDetail({
                                         <div className='flex flex-wrap gap-3'>
                                             {productSize.map(size => (
                                                 <button
-                                                
+
                                                     key={size}
                                                     className="px-4 py-2 border rounded-md hover:border-teal-600 hover:text-teal-600 transition-colors">
                                                     {size}

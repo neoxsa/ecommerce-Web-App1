@@ -24,7 +24,7 @@ function SearchBar({ search }) {
     }
 
     return products.filter((product) =>
-      product.title.toLowerCase().includes(debouncedQuery.toLowerCase()),
+      product.title?.toLowerCase().includes(debouncedQuery.toLowerCase()),
     );
   }, [products, debouncedQuery]);
 

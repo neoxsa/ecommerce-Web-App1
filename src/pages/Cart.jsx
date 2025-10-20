@@ -121,7 +121,7 @@ function Cart() {
                     <div className="flex justify-center absolute right-0 top-0 sm:relative">
                       <button
                         type="button"
-                        className="p-2 hover:text-red-500 transition-colors"
+                        className="p-2 text-red-500 hover:bg-gray-300 rounded-full"
                         onClick={() => {
                           dispatch(removeProduct(product.id.productId));
                           notify();

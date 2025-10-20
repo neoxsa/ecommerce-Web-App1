@@ -1,8 +1,8 @@
 import { lazy } from "react";
-const HeroSection = lazy(() => import("../components/Hero Section/HeroSection"));
-import ProductCard from "../components/Product Card/ProductCard";
+const HeroSection = lazy(() => import("../components/HeroSection/HeroSection"));
+import ProductCard from "../components/ProductCard/ProductCard";
 import Carousel from "../components/Carousel/Carousel";
-import FooterStripe from "../components/Footer Stripe/FooterStripe";
+import FooterStripe from "../components/FooterStripe/FooterStripe";
 import { useGetProductsQuery } from "../api/productsApi";
 import { Link, useNavigate } from "react-router-dom";
 import product_banner from "../assets/banner/product_banner.webp";
@@ -25,7 +25,7 @@ function Home() {
 
             {isError && (
               <div className="text-red-500">
-                Something went wrong: {error.error}
+                Something went wrong: {error?.error || error?.message || "failed to load"}
               </div>
             )}
 
@@ -46,9 +46,10 @@ function Home() {
                 />
               ))
               : products?.slice(0, 8).map((product) => (
-                <Link to={`/products/slug/${product.slug}`} key={product.id}>
+                <Link
+                  to={`/products/slug/${product.slug}`}
+                  key={product.id}>
                   <ProductCard
-                    key={product.id}
                     productImage={product.images}
                     productName={product.title}
                     productDesc={product.description}

@@ -1,4 +1,4 @@
-import CategoryProducts from '../components/Category Products/CategoryProducts'
+import CategoryProducts from '../components/CategoryProducts/CategoryProducts'
 
 function ProductsByCategory() {
     return (

@@ -104,7 +104,7 @@ function LogIn() {
               <label className="font-normal text-md  mt-2">Email:</label>
               <input
                 type="email"
-                className={`w-60 md:w-80 rounded-lg p-2 font-medium outline-2 focus:outline-3 focus:outline-teal-800 ${error.includes("email") || errors.email ? "outline-red-600 " : "outline-2"}`}
+                className={`w-60 md:w-80 rounded-lg p-2 font-medium outline-2 focus:outline-3 focus:outline-teal-800 ${(error?.includes?.("email")) || errors.email ? "outline-red-600 " : "outline-2"}`}
                 {...register("email", {
                   required: true,
                 })}
@@ -117,7 +117,7 @@ function LogIn() {
               <label className="font-normal">Password:</label>
               <input
                 type={showPassword ? "text" : "password"}
-                className={` w-60 md:w-80 rounded-lg p-2 font-medium outline-2 focus:outline-3 focus:outline-teal-800 ${error.includes("password") || errors.password ? "outline-red-600 " : "outline-2"}`}
+                className={` w-60 md:w-80 rounded-lg p-2 font-medium outline-2 focus:outline-3 focus:outline-teal-800 ${(error?.includes?.("password")) || errors.password ? "outline-red-600 " : "outline-2"}`}
                 {...register("password", {
                   required: true,
                 })}

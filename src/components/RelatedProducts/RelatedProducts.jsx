@@ -1,4 +1,4 @@
-import ProductCard from '../Product Card/ProductCard'
+import ProductCard from '../ProductCard/ProductCard'
 import { useGetProductsQuery, useGetProductBySlugQuery } from '../../api/productsApi'
 import { Link } from 'react-router-dom'
 

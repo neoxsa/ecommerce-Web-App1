@@ -1,9 +1,9 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { useNavigate } from 'react-router-dom'
 import { Pagination, Autoplay, EffectFade } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/effect-fade'
-import { useNavigate } from 'react-router-dom'
 
 const images = [
   "https://img.freepik.com/free-photo/still-life-with-classic-shirts-hanger_23-2150828620.jpg?t=st=1755783923~exp=1755787523~hmac=ef510ff942d90b39abfad46d7090ff7f6a4c6d650cf22869089f38bbeeab5777&w=1060",

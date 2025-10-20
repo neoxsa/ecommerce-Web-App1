@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import SideNavBar from "../NavBar/SideNavBar";
 import logo from "../../../assets/logo.webp";
-import SearchBar from "../../Search Bar/Search Bar";
+import SearchBar from "../../SearchBar/SearchBar";
 
 function NavBar() {
   const authStatus = useSelector((state) => state.auth.status);

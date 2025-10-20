@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useGetProductsPagedQuery } from '../api/productsApi'
-import ProductCard from '../components/Product Card/ProductCard'
+import ProductCard from '../components/ProductCard/ProductCard'
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb'
-import FooterStripe from '../components/Footer Stripe/FooterStripe'
+import FooterStripe from '../components/FooterStripe/FooterStripe'
 
 function Shop() {
 

@@ -11,7 +11,7 @@ import spinner from '../assets/spinner.gif'
 
 const schema = yup.object().shape({
     name: yup.string().required("Name is required"),
-    address: yup.string().required('address Address is required'),
+    address: yup.string().required('Address is required'),
     postalCode: yup.string().required('Postal Code required').matches(/^\d{6}$/, 'Postal Code must be in 6 digits'),
     phone: yup.string().required('Phone number is required'),
     email: yup.string().email('Invalid email').required('Email Required'),

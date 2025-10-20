@@ -1,4 +1,4 @@
-import LogoutBtn from "../components/Logout Btn/LogoutBtn";
+import LogoutBtn from "../components/LogoutBtn/LogoutBtn";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
@@ -6,7 +6,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import authService from "../appwrite/auth";
 import { logIn, logOut } from "../features/authSlice";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import spinner from "../assets/spinner.gif"
 import { ToastContainer, toast } from "react-toastify";
 

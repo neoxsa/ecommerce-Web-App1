@@ -1,28 +1,28 @@
 import { useState, useEffect } from 'react'
 import { useGetProductsQuery } from '../api/productsApi'
 import { Link } from 'react-router-dom'
-import ProductCard from '../components/Product Card/ProductCard'
+import ProductCard from '../components/ProductCard/ProductCard'
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb'
-import FooterStripe from '../components/Footer Stripe/FooterStripe'
+import FooterStripe from '../components/FooterStripe/FooterStripe'
 import { useSelector } from 'react-redux'
 
 function CategoryProducts() {
     const { data: products, isLoading, error, isError } = useGetProductsQuery()
-    const [filterProducts, setFilterProducts] = useState([])
+    const [filteredProducts, setFilteredProducts] = useState([])
     const [priceToggle, setPriceToggle] = useState(1)
     const items = useSelector(state => state.category)
 
 
     useEffect(() => {
         if (!products) {
-            setFilterProducts([]);
+            setFilteredProducts([]);
             return;
         }
 
-        let updatedProducts = [...products];
+        let updatedProducts = products;
 
         if (items.category === "All") {
-            setFilterProducts(products);
+            setFilteredProducts(products);
         } else if (items.category === "Clothes") {
             updatedProducts = updatedProducts.filter((product) => product.category.name === "Clothes");
         } else if (items.category === "Shoes") {
@@ -37,9 +37,9 @@ function CategoryProducts() {
             updatedProducts = [...updatedProducts].sort((a, b) => a.price - b.price);
         }
 
-        setFilterProducts(updatedProducts);
+        setFilteredProducts(updatedProducts);
 
-    }, [products, priceToggle]);
+    }, [products, priceToggle, items.category]);
 
 
     return (
@@ -55,7 +55,8 @@ function CategoryProducts() {
                 <div className='flex items-center flex-wrap  gap-3'>
                     <label
                         htmlFor="priceFilter"
-                        className='font-medium'>Price range:</label>
+                        className='font-medium'>Price range:
+                    </label>
                     <div className='flex items-center gap-2 text-sm'>
                         <span>Low</span>
                         <input
@@ -102,7 +103,7 @@ function CategoryProducts() {
                             />
                         )
                         :
-                        filterProducts?.map((product) =>
+                        filteredProducts?.map((product) =>
                             <Link
                                 to={`/products/slug/${product.slug}`}
                                 key={product.id}

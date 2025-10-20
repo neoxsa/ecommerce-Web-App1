@@ -32,7 +32,7 @@ export class AuthService {
     // Log In
     async logIn({ email, password }) {
         try {
-            
+
             return await this.account.createEmailPasswordSession(email, password)
         } catch (error) {
             console.log("Login error::", error)
@@ -54,8 +54,8 @@ export class AuthService {
     async updateUserProfile({ name, email, password, phone, prefs }) {
         try {
             const updates = []
-            if (name) { updates?.push(this.account.updateName(name)) }
-            if (prefs) { updates?.push(this.account.updatePrefs(prefs)) }
+            if (name) { updates.push(this.account.updateName(name)) }
+            if (prefs) { updates.push(this.account.updatePrefs(prefs)) }
 
             if (updates.length > 0) {
                 await Promise.all(updates);
@@ -77,7 +77,8 @@ export class AuthService {
         try {
             await this.account.deleteSessions();
         } catch (error) {
-            console.log("Logout error::", error)
+            console.log("Logout error::", error);
+            alert("Invalid password or email")
         }
     }
 }

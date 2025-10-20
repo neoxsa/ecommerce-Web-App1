@@ -2,16 +2,16 @@ import { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux'
 import NavBar from "./components/Header/NavBar/NavBar";
 import { Outlet } from "react-router-dom";
-import ScrollToTop from "./util/Scroll to Top/ScrollToTop";
+import ScrollToTop from "./util/ScrollToTop/ScrollToTop";
 import Footer from "./components/Footer/Footer";
 import authService from '../src/appwrite/auth'
 import { logIn, logOut } from '../src/features/authSlice'
-import TopDiscountBar from "./components/Top Discount Bar/TopDiscountBar";
+import TopDiscountBar from "./components/TopDiscountBar/TopDiscountBar";
 
 function App() {
 
   const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     authService.getCurrentUser()
@@ -22,7 +22,10 @@ function App() {
           dispatch(logOut())
         }
       })
-      .catch(error => console.log('Error ::', error.message))
+      .catch(error =>
+        // console.log('Error ::', error.message)
+        (<div className="flex w-full justify-center items-center text-red-400"> "Error ::", ${error.message}</div>)
+      )
       .finally(() => setLoading(false))
   }, [])
 
@@ -32,7 +35,7 @@ function App() {
       {!loading ? (
         <div className="cursor-default">
           <ScrollToTop />
-          <TopDiscountBar/>
+          <TopDiscountBar />
           <NavBar />
           <Outlet />
           <Footer />

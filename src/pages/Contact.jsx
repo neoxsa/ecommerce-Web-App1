@@ -3,8 +3,9 @@ import { Clock, LocateIcon, Phone } from 'lucide-react'
 
 function Contact() {
 
-  const submitHandler = () => {
-    console.log('Sent Successfully')
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log('Sent Successfully');
   }
   return (
     <>

@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux"
 
 function LogoutBtn({
     className = "",
-    closeLinkClick,
     buttonText,
     type,
     ...props
@@ -17,7 +16,9 @@ function LogoutBtn({
     const logOutHandler = () => {
         authService.logOut()
             .then(() => {
-                dispatch(logOut())
+                dispatch(logOut());
+            }).catch((error) => {
+                console.log("Logout error::", error)
             })
     }
 

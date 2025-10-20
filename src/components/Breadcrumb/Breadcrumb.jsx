@@ -7,7 +7,7 @@ function Breadcrumb({
   pageName = ''
 }) {
   return (
-    <div>
+    <>
       <div className='relative h-52 md:h-80 flex items-center justify-center w-full'>
         <img
           className=' w-full h-52 md:h-80 object-cover opacity-70 blur-[1.2px]'
@@ -38,7 +38,7 @@ function Breadcrumb({
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
