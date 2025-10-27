@@ -59,7 +59,7 @@ function RelatedProducts({
                     productImage={product.images}
                     productName={product.title}
                     productDesc={product.description}
-                    sellingPrice={`$${product.price}`}
+                    sellingPrice={`$${product.price.toFixed(2)}`}
                     mrp="$100.00"
 
                   />

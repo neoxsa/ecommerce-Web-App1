@@ -113,7 +113,7 @@ function CategoryProducts() {
                                     productImage={product.images}
                                     productName={product.title}
                                     productDesc={product.description}
-                                    sellingPrice={`$${product.price}.00`}
+                                    sellingPrice={`$${product.price.toFixed(2)}`}
                                 />
                             </Link>
                         )

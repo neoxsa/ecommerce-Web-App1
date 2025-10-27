@@ -28,7 +28,7 @@ function SingleProduct() {
               productImage2={product ? product.images[1] : ""}
               productImage3={product ? product.images[2] : ""}
               productTitle={product?.title}
-              sellingPrice={product?.price}
+              sellingPrice={product?.price.toFixed(2)}
               productType={product?.category?.name}
               categorySlug={product?.category?.slug}
               description={product?.description}

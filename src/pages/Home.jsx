@@ -53,7 +53,7 @@ function Home() {
                     productImage={product.images}
                     productName={product.title}
                     productDesc={product.description}
-                    sellingPrice={`$${product.price}`}
+                    sellingPrice={`$${product.price.toFixed(2)}`}
                   />
                 </Link>
               ))}

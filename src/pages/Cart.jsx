@@ -81,7 +81,7 @@ function Cart() {
                     </div>
 
                     <div className="text-sm font-medium">
-                      ${product.price.sellingPrice}
+                      ${Number(product.price.sellingPrice).toFixed(2)}
                     </div>
 
                     <div>
@@ -143,11 +143,11 @@ function Cart() {
               <div className="space-y-4">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Subtotal</span>
-                  <span className="font-medium">${subTotal}</span>
+                  <span className="font-medium">${subTotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Total</span>
-                  <span className="font-medium text-teal-800">${subTotal}</span>
+                  <span className="font-medium text-teal-800">${subTotal.toFixed(2)}</span>
                 </div>
                 {
                   userStatus ? (

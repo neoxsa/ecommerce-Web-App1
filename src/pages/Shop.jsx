@@ -12,7 +12,7 @@ function Shop() {
 
   const scrollTopOnClick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  const { data: products, isLoading, error, isError } = useGetProductsPagedQuery(page, limit)
+  const { data: products, isLoading, isError } = useGetProductsPagedQuery(page, limit)
 
   // previous Page
   const handlePreviousPage = () => {
@@ -152,7 +152,7 @@ function Shop() {
                   productImage={product.images}
                   productName={product.title}
                   productDesc={product.description}
-                  sellingPrice={`$${product.price}.00`}
+                  sellingPrice={`$${product.price.toFixed(2)}`}
                 />
               </Link>
             )

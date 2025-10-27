@@ -355,7 +355,7 @@ function Checkout() {
                                                             × {product.qty.quantity}
                                                         </span>
                                                     </span>
-                                                    <span className='font-medium'>${totalPrice}</span>
+                                                    <span className='font-medium'>${totalPrice.toFixed(2)}</span>
                                                 </div>
                                             )
                                         })}
@@ -363,20 +363,20 @@ function Checkout() {
                                         <div className='space-y-3 pt-4 border-t border-gray-200'>
                                             <div className='flex justify-between items-center'>
                                                 <span>Subtotal</span>
-                                                <span>${subTotal}</span>
+                                                <span>${subTotal.toFixed(2)}</span>
                                             </div>
                                             <div className='flex justify-between items-center'>
                                                 <span>Delivery Charges</span>
                                                 {shippingCharge === 0 ? (<span >
                                                     <span className='text-green-600 '>Free </span>
-                                                    <span className='line-through text-gray-600'>$15</span>
-                                                </span>) : (<span >${shippingCharge}</span>)}
+                                                    <span className='line-through text-gray-600'>$15.00</span>
+                                                </span>) : (<span >${shippingCharge.toFixed(2)}</span>)}
 
                                             </div>
                                             <div className='flex justify-between items-center pt-3 border-t border-gray-200'>
                                                 <span className='text-lg font-medium'>Grand Total</span>
                                                 <span className='text-xl text-teal-800 font-medium'>
-                                                    ${grandTotal}
+                                                    ${grandTotal.toFixed(2)}
                                                 </span>
                                             </div>
                                         </div>
